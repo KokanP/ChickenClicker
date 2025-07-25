@@ -1,5 +1,5 @@
 import { CONFIG, achievements } from './config.js';
-import { calculateCost, formatNumber, formatTime, getEggsPerSecond, getEggsPerClick, getReputationBonus, generateAchievementScreenshot } from './game.js';
+import { calculateCost, formatNumber, getEggsPerSecond, getEggsPerClick, getReputationBonus, generateAchievementScreenshot } from './utils.js';
 
 // --- DOM Element References ---
 export const elements = {

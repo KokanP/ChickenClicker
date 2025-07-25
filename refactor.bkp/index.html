@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chicken Clicker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="text-gray-800">
+
+    <!-- App Wrapper for Desktop View -->
+    <div id="app-wrapper" class="w-full h-full md:max-w-lg md:h-[850px] md:relative md:border-8 md:border-[var(--saddle-brown)] md:rounded-2xl md:shadow-2xl md:overflow-hidden flex flex-col bg-cover bg-center" style="background-image: url('https://www.transparenttextures.com/patterns/hay-bale.png');">
+    
+        <!-- Main Game Screen -->
+        <div id="game-container" class="flex flex-col h-full relative">
+            <div id="event-banner" class="funky-font text-xl md:text-2xl"></div>
+            <div id="colored-egg-container" class="absolute inset-0"></div>
+
+            <header class="text-center pt-6 pb-2">
+                <h1 class="text-5xl md:text-7xl funky-font text-white" style="text-shadow: 4px 4px 0px var(--saddle-brown);">Chicken Clicker</h1>
+                 <p id="player-name-display" class="funky-font text-2xl text-yellow-300" style="text-shadow: 2px 2px 0px var(--saddle-brown);"></p>
+            </header>
+
+            <div id="egg-stats" class="text-center mb-4 p-2 mx-4 game-card">
+                <h2 id="egg-counter" class="text-4xl md:text-5xl funky-font text-blue-600">0 Eggs</h2>
+                <div class="flex justify-center items-center gap-4">
+                    <p id="feather-counter" class="text-xl md:text-2xl funky-font text-yellow-600">0 Golden Feathers</p>
+                </div>
+                <p id="eggs-per-second" class="text-lg md:text-xl font-bold">per second: 0</p>
+                <p id="eggs-per-click" class="text-lg md:text-xl font-bold">per click: 1</p>
+            </div>
+
+            <main class="flex-grow flex justify-center items-center px-4 pb-20">
+                <div class="chicken-container">
+                    <svg id="chicken" class="chicken" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" alt="A majestic chicken">
+                        <path d="M 25,75 C -10,90 10,30 50,30 C 90,30 110,90 75,75 C 60,95 40,95 25,75 Z" fill="white" stroke="black" stroke-width="3"/>
+                        <circle cx="65" cy="25" r="15" fill="white" stroke="black" stroke-width="3"/>
+                        <path d="M 60,12 C 60,5 70,5 70,12 C 75,5 80,8 75,15 L 60,15 Z" fill="red" stroke="black" stroke-width="2"/>
+                        <path d="M 78,25 L 88,30 L 78,35 Z" fill="orange" stroke="black" stroke-width="2"/>
+                        <path d="M 75,32 C 75,40 70,40 70,32" fill="red" stroke="black" stroke-width="2"/>
+                        <circle cx="70" cy="23" r="2" fill="black"/>
+                        <path d="M 20,60 C 5,50 5,30 25,40" fill="none" stroke="black" stroke-width="3"/>
+                        <path d="M 25,65 C 10,55 10,35 30,45" fill="none" stroke="black" stroke-width="3"/>
+                    </svg>
+                </div>
+            </main>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav md:absolute">
+             <button class="nav-button" data-modal="upgrades-screen">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" /></svg>
+                <span>Upgrades</span>
+            </button>
+            <button class="nav-button" data-modal="coop-screen">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205 3 1m-3-1-3-1.091m0 3.273 3 1.091M5.25 6.086 3 7.091m0 0L2.25 9l4.5-1.636M7.5 3l1.5.545M7.5 10.75l3 1.091m0-3.273-3-1.091" /></svg>
+                <span>The Coop</span>
+            </button>
+            <button class="nav-button" data-modal="achievements-screen">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9a9.75 9.75 0 1 0 0-13.5h9a9.75 9.75 0 1 0 0 13.5ZM10.5 12.75h3" /></svg>
+                <span>Achievements</span>
+            </button>
+            <button class="nav-button" data-modal="settings-screen">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-1.007 1.11-1.226.554-.22 1.196-.22 1.75 0 .554.22 1.02.684 1.11 1.226l.08 1.113c.093.124.19.242.292.356.102.115.21.223.324.32l1.028.747c.456.33.974.543 1.52.543.547 0 1.065-.213 1.495-.543l1.028-.747c.114-.097.222-.205.324-.32.102-.114.2-.232.292-.356l.08-1.113c.09-.542.56-1.007 1.11-1.226.554-.22 1.196-.22 1.75 0 .554.22 1.02.684 1.11 1.226l.08 1.113c.093.124.19.242.292.356.102.115.21.223.324.32l1.028.747c.456.33.974.543 1.52.543.547 0 1.065-.213 1.495-.543l1.028-.747c.114-.097.222-.205.324-.32.102-.114.2-.232.292-.356l.08-1.113c.09-.542.56-1.007 1.11-1.226.554-.22 1.196-.22 1.75 0 .554.22 1.02.684 1.11 1.226l.08 1.113c.093.124.19.242.292.356.102.115.21.223.324.32l1.028.747c.456.33.974.543 1.52.543.547 0 1.065-.213 1.495-.543l1.028-.747c.114-.097.222-.205.324-.32.102-.114.2-.232.292-.356l.08-1.113c.09-.542.56-1.007 1.11-1.226.554-.22 1.196-.22 1.75 0 .554.22 1.02.684 1.11 1.226l.08 1.113c.093.124.19.242.292.356.102.115.21.223.324.32l1.028.747c.456.33.974.543 1.52.543.547 0 1.065-.213 1.495-.543l1.028-.747c.114-.097.222-.205.324-.32.102-.114.2-.232.292-.356l.08-1.113a1.5 1.5 0 0 0-2.22-1.664l-1.028.747a1.5 1.5 0 0 1-1.875 0l-1.028-.747a1.5 1.5 0 0 0-1.664-2.22l-1.113.08c-.124.093-.242.19-.356.292-.115.102-.223.21-.32.324l-.747 1.028a1.5 1.5 0 0 0 0 1.875l.747 1.028c.097.114.205.222.32.324.114.102.232.2.356.292l1.113.08c.602.09 1.15-.155 1.485-.62l.747-1.028a1.5 1.5 0 0 1 2.22-.162l.08 1.113c.09.542-.155 1.15-.62 1.485l-1.028.747a1.5 1.5 0 0 1-1.875 0l-1.028-.747a1.5 1.5 0 0 0-1.664 2.22l-1.113-.08c-.124-.093-.242-.19-.356-.292-.115-.102-.223-.21-.32-.324l-.747-1.028a1.5 1.5 0 0 0 0-1.875l.747-1.028c.097-.114.205-.222.32-.324.114-.102.232-.2.356-.292l1.113-.08a1.5 1.5 0 0 0 1.485.62l.747 1.028a1.5 1.5 0 0 1-2.22.162l-.08-1.113a1.5 1.5 0 0 0-1.485-.62l-.747-1.028a1.5 1.5 0 0 1 0-1.875l.747-1.028c.335-.465.933-.71 1.485-.62l1.113.08c.124.093.242.19.356.292.115.102.223.21.32.324l.747 1.028a1.5 1.5 0 0 0 1.875 0l.747-1.028a1.5 1.5 0 0 1 1.664-2.22l1.113.08c.602.09 1.15-.155 1.485-.62l.747-1.028a1.5 1.5 0 0 0 0-1.875l-.747-1.028c-.335-.465-.933-.71-1.485-.62l-1.113.08c-.124.093-.242.19-.356.292-.115-.102-.223-.21-.32.324l-.747 1.028a1.5 1.5 0 0 1-1.875 0l-.747-1.028a1.5 1.5 0 0 0-1.664-2.22z" /></svg>
+                <span>Settings</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Name Input Modal -->
+    <div id="name-modal" class="modal-screen">
+        <div class="modal-content">
+            <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">Welcome, Farmer!</h2>
+            <div class="modal-body flex flex-col justify-center items-center space-y-4">
+                <label for="initial-nickname-input" class="funky-font text-2xl text-white" style="text-shadow: 2px 2px 0px var(--saddle-brown);">What's your name?</label>
+                <input type="text" id="initial-nickname-input" placeholder="Enter Nickname" class="w-full max-w-xs text-center funky-font bg-white/80 border-4 border-[#8B4513] rounded-lg p-2 text-xl text-[#8B4513] placeholder:text-gray-500/80 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                <button id="start-game-btn" class="w-full max-w-xs funky-button bg-green-500 text-white">Start Cluckin'</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Screens -->
+    <div id="upgrades-screen" class="modal-screen">
+        <div class="modal-content">
+            <button class="close-modal-btn">&times;</button>
+            <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">Upgrades</h2>
+            <div id="upgrades-list" class="modal-body space-y-4">
+                <!-- Upgrades will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <div id="coop-screen" class="modal-screen">
+        <div class="modal-content">
+            <button class="close-modal-btn">&times;</button>
+            <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">The Coop</h2>
+            <div id="coop-list" class="modal-body space-y-4">
+                <!-- Chickens will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <div id="achievements-screen" class="modal-screen">
+        <div class="modal-content">
+            <button class="close-modal-btn">&times;</button>
+            <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">Achievements</h2>
+            <div class="modal-body">
+                <div id="achievements-list" class="space-y-2 pr-2"></div>
+                <div class="mt-6">
+                    <h3 class="text-3xl funky-font text-center mb-4 border-b-4 border-gray-200 pb-2">Prestige</h3>
+                    <div class="bg-purple-200 p-4 rounded-lg border-2 border-purple-400">
+                        <h4 class="text-2xl funky-font">Sell the Coop</h4>
+                        <p class="text-gray-600 mb-2">Reset progress for a permanent production boost. Requires 1 Trillion eggs.</p>
+                        <p>Reputation: <span id="reputation-points" class="font-bold">0</span> (+<span id="reputation-bonus" class="font-bold">0</span>% bonus)</p>
+                        <button id="prestige-button" class="w-full mt-2 funky-button bg-purple-600 text-white">Sell Coop</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="settings-screen" class="modal-screen">
+        <div class="modal-content">
+            <button class="close-modal-btn">&times;</button>
+            <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">Settings</h2>
+            <div class="modal-body space-y-6">
+                <div>
+                    <label for="nickname-input" class="funky-font text-2xl text-white" style="text-shadow: 2px 2px 0px var(--saddle-brown);">Nickname</label>
+                    <input type="text" id="nickname-input" placeholder="Enter Your Nickname" class="w-full text-center funky-font bg-white/80 border-4 border-[#8B4513] rounded-lg p-2 text-xl text-[#8B4513] placeholder:text-gray-500/80 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                </div>
+                <div>
+                    <h3 class="funky-font text-2xl text-white" style="text-shadow: 2px 2px 0px var(--saddle-brown);">Danger Zone</h3>
+                     <button id="reset-button" class="w-full mt-2 funky-button bg-red-600 text-white">Hard Reset Game</button>
+                </div>
+                <div>
+                    <details class="license-details text-sm text-gray-800 bg-white/50 p-2 rounded-lg">
+                        <summary id="license-summary" class="font-bold text-gray-800 cursor-pointer">MIT License</summary>
+                        <div class="mt-2 space-y-2 text-xs">
+                            <p class="font-normal">Copyright (c) 2024 Kok</p>
+                            <p class="font-normal">Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+                            <p class="font-normal">The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+                            <p class="font-normal">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+                        </div>
+                    </details>
+                </div>
+                <div class="text-center text-gray-600">
+                    <p>Version: <span id="version-number">2.3</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating text and other dynamic elements -->
+    <div id="achievement-screenshot-template">
+        <h2 class="funky-font text-4xl text-center" style="text-shadow: 3px 3px 0px var(--saddle-brown);">Achievement Unlocked!</h2>
+        <div class="text-center mt-4">
+            <p id="screenshot-nickname" class="funky-font text-3xl text-yellow-300" style="text-shadow: 2px 2px 0px var(--saddle-brown);"></p>
+            <p class="text-xl font-bold mt-1" style="text-shadow: 1px 1px 0px #000;">has achieved</p>
+            <p id="screenshot-ach-name" class="funky-font text-4xl mt-2" style="text-shadow: 2px 2px 0px var(--saddle-brown);"></p>
+            <p id="screenshot-ach-desc" class="text-lg font-semibold mt-1" style="text-shadow: 1px 1px 0px #000;"></p>
+            <p id="screenshot-date" class="text-md mt-6 font-bold" style="text-shadow: 1px 1px 0px #000;"></p>
+        </div>
+    </div>
+    <svg id="golden-chicken" class="golden-chicken" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" alt="Golden Chicken">
+        <defs><linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FFDF00;stop-opacity:1" /><stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" /></linearGradient></defs>
+        <path d="M 25,75 C -10,90 10,30 50,30 C 90,30 110,90 75,75 C 60,95 40,95 25,75 Z" fill="url(#gold-gradient)" stroke="#8B4513" stroke-width="3"/>
+        <circle cx="65" cy="25" r="15" fill="url(#gold-gradient)" stroke="#8B4513" stroke-width="3"/>
+        <path d="M 60,12 C 60,5 70,5 70,12 C 75,5 80,8 75,15 L 60,15 Z" fill="red" stroke="#8B4513" stroke-width="2"/>
+        <path d="M 78,25 L 88,30 L 78,35 Z" fill="orange" stroke="#8B4513" stroke-width="2"/>
+        <path d="M 75,32 C 75,40 70,40 70,32" fill="red" stroke="#8B4513" stroke-width="2"/>
+        <circle cx="70" cy="23" r="2" fill="black"/>
+        <path d="M 20,60 C 5,50 5,30 25,40" fill="none" stroke="#8B4513" stroke-width="3"/>
+        <path d="M 25,65 C 10,55 10,35 30,45" fill="none" stroke="#8B4513" stroke-width="3"/>
+    </svg>
+    <div id="achievement-toast" class="achievement-toast funky-font">
+        <strong id="toast-title">Achievement Unlocked!</strong>
+        <p id="toast-description">You're a natural!</p>
+    </div>
+
+    <script type="module" src="game.js"></script>
+</body>
+</html>
