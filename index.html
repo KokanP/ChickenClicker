@@ -69,14 +69,14 @@
         }
         .super-click-text {
              font-size: 3.5rem;
-             color: #f472b6; /* Pink */
+             color: #f472b6; 
         }
         @keyframes floatUp {
             from { opacity: 1; transform: translateY(0) rotate(0deg); }
             to { opacity: 0; transform: translateY(-120px) rotate(15deg); }
         }
         .golden-chicken, .colored-egg {
-            position: absolute; /* Contained within app-wrapper */
+            position: absolute; 
             cursor: pointer;
             transition: transform 0.2s, opacity 0.5s;
             z-index: 100;
@@ -107,7 +107,7 @@
             color: white;
             padding: 1rem 2rem;
             border-radius: 50px;
-            z-index: 1100; /* Above modals */
+            z-index: 1100; 
             opacity: 0;
             transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             pointer-events: none;
@@ -202,7 +202,7 @@
         .nav-button svg { width: 28px; height: 28px; margin-bottom: 2px; }
         #event-banner {
             display: none;
-            position: absolute; /* Contained within wrapper */
+            position: absolute; 
             top: 0; left: 0;
             width: 100%;
             background: linear-gradient(45deg, #fceabb, #f8b500);
@@ -230,10 +230,10 @@
 </head>
 <body class="text-gray-800">
 
-    <!-- App Wrapper for Desktop View -->
+    
     <div id="app-wrapper" class="w-full h-full md:max-w-lg md:h-[850px] md:relative md:border-8 md:border-[var(--saddle-brown)] md:rounded-2xl md:shadow-2xl md:overflow-hidden flex flex-col bg-cover bg-center" style="background-image: url('https://www.transparenttextures.com/patterns/hay-bale.png');">
     
-        <!-- Main Game Screen -->
+        
         <div id="game-container" class="flex flex-col h-full relative">
             <div id="event-banner" class="funky-font text-xl md:text-2xl"></div>
             <div id="colored-egg-container" class="absolute inset-0"></div>
@@ -269,7 +269,7 @@
             </main>
         </div>
 
-        <!-- Bottom Navigation -->
+        
         <nav class="bottom-nav md:absolute">
              <button class="nav-button" data-modal="upgrades-screen">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" /></svg>
@@ -284,13 +284,13 @@
                 <span>Achievements</span>
             </button>
             <button class="nav-button" data-modal="settings-screen">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-1.007 1.11-1.226.554-.22 1.196-.22 1.75 0 .554.22 1.02.684 1.11 1.226l.08 1.113c.093.124.19.242.292.356.102.115.21.223.324.32l1.028.747c.456.33.974.543 1.52.543.547 0 1.065-.213 1.495-.543l1.028-.747c.114-.097.222-.205.324-.32.102-.114.2-.232.292-.356l.08-1.113c.09-.542.56-1.007 1.11-1.226.554-.22 1.196-.22 1.75 0 .554.22 1.02.684 1.11 1.226l.08 1.113c.093.124.19.242.292.356.102.115.21.223.324.32l1.028.747c.456.33.974.543 1.52.543.547 0 1.065-.213 1.495-.543l1.028-.747c.114-.097.222-.205.324-.32.102-.114.2-.232.292-.356l.08-1.113c.09-.542.56-1.007 1.11-1.226.554-.22 1.196-.22 1.75 0 .554.22 1.02.684 1.11 1.226l.08 1.113c.093.124.19.242.292.356.102.115.21.223.324.32l1.028.747c.456.33.974.543 1.52.543.547 0 1.065-.213 1.495-.543l1.028-.747c.114-.097.222-.205.324-.32.102-.114.2-.232.292-.356l.08-1.113a1.5 1.5 0 0 0-2.22-1.664l-1.028.747a1.5 1.5 0 0 1-1.875 0l-1.028-.747a1.5 1.5 0 0 0-1.664-2.22l-1.113.08c-.124.093-.242.19-.356.292-.115.102-.223.21-.32.324l-.747 1.028a1.5 1.5 0 0 0 0 1.875l.747 1.028c.097.114.205.222.32.324.114.102.232.2.356.292l1.113.08c.602.09 1.15-.155 1.485-.62l.747-1.028a1.5 1.5 0 0 1 2.22-.162l.08 1.113c.09.542-.155 1.15-.62 1.485l-1.028.747a1.5 1.5 0 0 1-1.875 0l-1.028-.747a1.5 1.5 0 0 0-1.664 2.22l-1.113-.08c-.124-.093-.242-.19-.356-.292-.115-.102-.223-.21-.32-.324l-.747-1.028a1.5 1.5 0 0 0 0-1.875l.747-1.028c.097-.114.205-.222.32-.324.114-.102.232-.2.356-.292l1.113-.08a1.5 1.5 0 0 0 1.485.62l.747 1.028a1.5 1.5 0 0 1-2.22.162l-.08-1.113a1.5 1.5 0 0 0-1.485-.62l-.747-1.028a1.5 1.5 0 0 1 0-1.875l.747-1.028c.335-.465.933-.71 1.485-.62l1.113.08c.124.093.242.19.356.292.115.102.223.21.32.324l.747 1.028a1.5 1.5 0 0 0 1.875 0l.747-1.028a1.5 1.5 0 0 1 1.664-2.22l1.113.08c.602.09 1.15-.155 1.485-.62l.747-1.028a1.5 1.5 0 0 0 0-1.875l-.747-1.028c-.335-.465-.933-.71-1.485-.62l-1.113.08c-.124.093-.242.19-.356.292-.115-.102-.223-.21-.32.324l-.747 1.028a1.5 1.5 0 0 1-1.875 0l-.747-1.028a1.5 1.5 0 0 0-1.664-2.22z" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-1.007 1.11-1.226.554-.22 1.196-.22 1.75 0 .554.22 1.02.684 1.11 1.226l.08 1.113c.093.124.19.242.292.356.102.115.21.223.324.32l1.028.747c.456.33.974.543 1.52.543.547 0 1.065-.213 1.495-.543l1.028-.747c.114-.097.222-.205.324-.32.102-.114.2-.232.292-.356l.08-1.113c.09-.542.56-1.007 1.11-1.226.554-.22 1.196-.22 1.75 0 .554.22 1.02.684 1.11 1.226l.08 1.113c.093.124.19.242.292.356.102.115.21.223.324.32l1.028.747c.456.33.974.543 1.52.543.547 0 1.065-.213 1.495-.543l1.028-.747c.114-.097.222-.205.324-.32.102-.114.2-.232.292-.356l.08-1.113c.09-.542.56-1.007 1.11-1.226.554-.22 1.196-.22 1.75 0 .554.22 1.02.684 1.11 1.226l.08 1.113c.093.124.19.242.292.356.102.115.21.223.324.32l1.028.747c.456.33.974.543 1.52.543.547 0 1.065-.213 1.495-.543l1.028-.747c.114-.097.222-.205.324-.32.102-.114.2-.232.292-.356l.08-1.113a1.5 1.5 0 0 0-2.22-1.664l-1.028.747a1.5 1.5 0 0 1-1.875 0l-1.028-.747a1.5 1.5 0 0 0-1.664-2.22l-1.113.08c-.124.093-.242.19-.356.292-.115.102-.223.21-.32.324l-.747 1.028a1.5 1.5 0 0 0 0 1.875l.747 1.028c.097.114.205.222.32.324.114.102.232.2.356.292l1.113.08c.602.09 1.15-.155 1.485-.62l.747-1.028a1.5 1.5 0 0 1 2.22-.162l.08 1.113c.09.542-.155 1.15-.62 1.485l-1.028.747a1.5 1.5 0 0 1-1.875 0l-1.028-.747a1.5 1.5 0 0 0-1.664 2.22l-1.113-.08c-.124-.093-.242-.19-.356-.292-.115-.102-.223-.21-.32-.324l-.747-1.028a1.5 1.5 0 0 0 0-1.875l.747-1.028c.097-.114.205-.222.32-.324.114-.102.232-.2.356-.292l1.113-.08a1.5 1.5 0 0 0 1.485.62l.747 1.028a1.5 1.5 0 0 1-2.22.162l-.08-1.113a1.5 1.5 0 0 0-1.485-.62l-.747-1.028a1.5 1.5 0 0 1 0-1.875l.747-1.028c.335-.465.933-.71 1.485-.62l1.113.08c.124.093.242.19.356.292.115.102.223.21.32.324l.747 1.028a1.5 1.5 0 0 0 1.875 0l.747-1.028a1.5 1.5 0 0 1 1.664-2.22l1.113.08c.602.09 1.15-.155 1.485-.62l.747-1.028a1.5 1.5 0 0 0 0-1.875l-.747-1.028c-.335-.465-.933-.71-1.485-.62l-1.113.08c-.124.093-.242-.19-.356-.292-.115-.102-.223-.21-.32.324l-.747 1.028a1.5 1.5 0 0 1-1.875 0l-.747-1.028a1.5 1.5 0 0 0-1.664-2.22z" /></svg>
                 <span>Settings</span>
             </button>
         </nav>
     </div>
 
-    <!-- Name Input Modal -->
+    
     <div id="name-modal" class="modal-screen">
         <div class="modal-content">
             <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">Welcome, Farmer!</h2>
@@ -302,13 +302,13 @@
         </div>
     </div>
 
-    <!-- Modal Screens -->
+    
     <div id="upgrades-screen" class="modal-screen">
         <div class="modal-content">
             <button class="close-modal-btn">&times;</button>
             <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">Upgrades</h2>
             <div id="upgrades-list" class="modal-body space-y-4">
-                <!-- Upgrades will be dynamically inserted here -->
+                
             </div>
         </div>
     </div>
@@ -318,7 +318,7 @@
             <button class="close-modal-btn">&times;</button>
             <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">The Coop</h2>
             <div id="coop-list" class="modal-body space-y-4">
-                <!-- Chickens will be dynamically inserted here -->
+                
             </div>
         </div>
     </div>
@@ -373,7 +373,7 @@
         </div>
     </div>
 
-    <!-- Floating text and other dynamic elements -->
+    
     <div id="achievement-screenshot-template">
         <h2 class="funky-font text-4xl text-center" style="text-shadow: 3px 3px 0px var(--saddle-brown);">Achievement Unlocked!</h2>
         <div class="text-center mt-4">
@@ -401,12 +401,11 @@
     </div>
 
     <script type="module">
-        // --- Single-File Merged JavaScript for Chicken Clicker ---
-
-        // --- config.js content ---
+        
+        
         const CONFIG = {
-            SAVE_KEY: 'chickenClickerSave_v2.4', // Updated save key for the new version
-            GAME_VERSION: '2.4', // Updated version number
+            SAVE_KEY: 'chickenClickerSave_v2.4', 
+            GAME_VERSION: '2.4', 
             GAME_TICK_INTERVAL: 0.1,
             SAVE_INTERVAL: 5,
             GOLDEN_CHICKEN_SPAWN_INTERVAL: 60,
@@ -536,7 +535,7 @@
             eggCollector: (gs) => Object.keys(CONFIG.COLORED_EGGS).every(c => gs.clickedColoredEggs[c]),
         };
 
-        // --- utils.js content ---
+        
         function formatNumber(num) {
             if (num === Infinity) return 'Infinity';
             if (num < 1000) return num.toFixed(0);
@@ -588,7 +587,7 @@
             return Math.floor(baseEpc * loomBoost * getAchievementBonus(gs) * getReputationBonus(gs) * getEventModifier(gs) * getBoostMultiplier(gs) * gs.permanentBonus * peckingOrderBonus * bantyBonus * getBuffModifier(gs, 'clickFrenzy'));
         };
 
-        // --- ui.js content ---
+        
         const elements = {
             nicknameInput: document.getElementById('nickname-input'),
             chicken: document.getElementById('chicken'),
@@ -744,7 +743,7 @@
             }, 1450);
         };
 
-        // --- game.js content ---
+        
         let gameState = {};
         const initialGameState = {
             nickname: null, eggs: 0, totalEggs: 0, feathers: 0, totalFeathers: 0, totalClicks: 0,
@@ -912,7 +911,7 @@
         function hardReset() {
             if (confirm("Are you sure you want to completely reset your game? This cannot be undone.")) {
                 gameState.resets = (gameState.resets || 0) + 1;
-                saveGame(); // Save the incremented reset count before reloading
+                saveGame(); 
                 localStorage.removeItem(CONFIG.SAVE_KEY);
                 location.reload();
             }
@@ -980,7 +979,7 @@
                     newGameState.prestigeCount = prestigeCount;
                     newGameState.unlockedAchievements = unlockedHidden;
                     newGameState.permanentBonus = permanentBonus;
-                    newGameState.resets = resets; // Carry over the reset counter
+                    newGameState.resets = resets; 
                     gameState = newGameState;
 
                     saveGame();
