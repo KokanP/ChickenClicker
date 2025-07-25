@@ -23,7 +23,26 @@ If you wish to run the game from the source files:
 
 *(The multi-file version is still available in the project history for reference.)*
 
+### **Save Management**
+
+Version 2.5 introduces the ability to export and import your save data. This is useful for creating backups or transferring your game to another browser or device.
+
+* **Exporting:** In the "Settings" menu, you can export your save data either to your clipboard or as a downloadable text file.  
+* **Importing:** In the "Settings" menu, you can paste save data into the text box and click "From Text", or you can select a previously downloaded save file by clicking "From File". The game will reload to apply the new save state.
+
 ## **Changelog**
+
+### **Version 2.5 (Totoro)**
+
+*Named in honor of user Totoro\_Sama for discovering and reporting a critical, game-breaking bug.*
+
+* **Feature:** Added a comprehensive "Help" screen accessible from the main navigation bar. It explains all core game mechanics, currencies, and concepts.  
+* **Feature:** Implemented a robust save management system in the Settings menu. Players can now export their save to the clipboard or a file, and import a save from text or a file.  
+* **Bug Fix (Critical):** Fixed a game-breaking bug where the "Nest Egg IRA" upgrade could cause the player's egg count to become Infinity. This led to a corrupted save file upon prestiging, making the game unresponsive. The upgrade's bonus is now capped relative to base production.  
+* **Bug Fix:** Corrected the logic for the "Doja Cow's" Super Click chain bonus, which was previously inverted and punished rapid clicks instead of rewarding them.  
+* **Bug Fix:** Fixed the non-functional "Discount" (Green Egg) and "Feather Frenzy" (Orange Egg) buffs. They now correctly apply their effects.  
+* **Bug Fix:** Ensured the "Hard Reset" achievement is now correctly awarded.  
+* **Housekeeping:** Updated the game's internal version number and save file key to 2.5 to prevent conflicts with older, potentially corrupt save files.
 
 ### **Version 2.4 (Hotfix & Consolidation)**
 

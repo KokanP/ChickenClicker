@@ -69,14 +69,14 @@
         }
         .super-click-text {
              font-size: 3.5rem;
-             color: #f472b6; 
+             color: #f472b6; /* Pink */
         }
         @keyframes floatUp {
             from { opacity: 1; transform: translateY(0) rotate(0deg); }
             to { opacity: 0; transform: translateY(-120px) rotate(15deg); }
         }
         .golden-chicken, .colored-egg {
-            position: absolute; 
+            position: absolute; /* Contained within app-wrapper */
             cursor: pointer;
             transition: transform 0.2s, opacity 0.5s;
             z-index: 100;
@@ -107,7 +107,7 @@
             color: white;
             padding: 1rem 2rem;
             border-radius: 50px;
-            z-index: 1100; 
+            z-index: 1100; /* Above modals */
             opacity: 0;
             transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             pointer-events: none;
@@ -202,7 +202,7 @@
         .nav-button svg { width: 28px; height: 28px; margin-bottom: 2px; }
         #event-banner {
             display: none;
-            position: absolute; 
+            position: absolute; /* Contained within wrapper */
             top: 0; left: 0;
             width: 100%;
             background: linear-gradient(45deg, #fceabb, #f8b500);
@@ -226,14 +226,31 @@
             border-radius: 15px;
             color: white;
         }
+        /* Help modal specific styles */
+        #help-screen .modal-body h3, #settings-screen .changelog-details h4 {
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 1.75rem;
+            color: var(--saddle-brown);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 3px solid var(--burly-wood);
+            padding-bottom: 0.25rem;
+        }
+        #help-screen .modal-body p, #settings-screen .changelog-details ul {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+        #help-screen .modal-body strong {
+            color: var(--saddle-brown);
+        }
     </style>
 </head>
 <body class="text-gray-800">
 
-    
+    <!-- App Wrapper for Desktop View -->
     <div id="app-wrapper" class="w-full h-full md:max-w-lg md:h-[850px] md:relative md:border-8 md:border-[var(--saddle-brown)] md:rounded-2xl md:shadow-2xl md:overflow-hidden flex flex-col bg-cover bg-center" style="background-image: url('https://www.transparenttextures.com/patterns/hay-bale.png');">
     
-        
+        <!-- Main Game Screen -->
         <div id="game-container" class="flex flex-col h-full relative">
             <div id="event-banner" class="funky-font text-xl md:text-2xl"></div>
             <div id="colored-egg-container" class="absolute inset-0"></div>
@@ -269,7 +286,7 @@
             </main>
         </div>
 
-        
+        <!-- Bottom Navigation -->
         <nav class="bottom-nav md:absolute">
              <button class="nav-button" data-modal="upgrades-screen">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" /></svg>
@@ -283,6 +300,10 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9a9.75 9.75 0 1 0 0-13.5h9a9.75 9.75 0 1 0 0 13.5ZM10.5 12.75h3" /></svg>
                 <span>Achievements</span>
             </button>
+            <button class="nav-button" data-modal="help-screen">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" /></svg>
+                <span>Help</span>
+            </button>
             <button class="nav-button" data-modal="settings-screen">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-1.007 1.11-1.226.554-.22 1.196-.22 1.75 0 .554.22 1.02.684 1.11 1.226l.08 1.113c.093.124.19.242.292.356.102.115.21.223.324.32l1.028.747c.456.33.974.543 1.52.543.547 0 1.065-.213 1.495-.543l1.028-.747c.114-.097.222-.205.324-.32.102-.114.2-.232.292-.356l.08-1.113c.09-.542.56-1.007 1.11-1.226.554-.22 1.196-.22 1.75 0 .554.22 1.02.684 1.11 1.226l.08 1.113c.093.124.19.242.292.356.102.115.21.223.324.32l1.028.747c.456.33.974.543 1.52.543.547 0 1.065-.213 1.495-.543l1.028-.747c.114-.097.222-.205.324-.32.102-.114.2-.232.292-.356l.08-1.113c.09-.542.56-1.007 1.11-1.226.554-.22 1.196-.22 1.75 0 .554.22 1.02.684 1.11 1.226l.08 1.113c.093.124.19.242.292.356.102.115.21.223.324.32l1.028.747c.456.33.974.543 1.52.543.547 0 1.065-.213 1.495-.543l1.028-.747c.114-.097.222-.205.324-.32.102-.114.2-.232.292-.356l.08-1.113a1.5 1.5 0 0 0-2.22-1.664l-1.028.747a1.5 1.5 0 0 1-1.875 0l-1.028-.747a1.5 1.5 0 0 0-1.664-2.22l-1.113.08c-.124.093-.242.19-.356.292-.115.102-.223.21-.32.324l-.747 1.028a1.5 1.5 0 0 0 0 1.875l.747 1.028c.097.114.205.222.32.324.114.102.232.2.356.292l1.113.08c.602.09 1.15-.155 1.485-.62l.747-1.028a1.5 1.5 0 0 1 2.22-.162l.08 1.113c.09.542-.155 1.15-.62 1.485l-1.028.747a1.5 1.5 0 0 1-1.875 0l-1.028-.747a1.5 1.5 0 0 0-1.664 2.22l-1.113-.08c-.124-.093-.242-.19-.356-.292-.115-.102-.223-.21-.32-.324l-.747-1.028a1.5 1.5 0 0 0 0-1.875l.747-1.028c.097-.114.205-.222.32-.324.114-.102.232-.2.356-.292l1.113-.08a1.5 1.5 0 0 0 1.485.62l.747 1.028a1.5 1.5 0 0 1-2.22.162l-.08-1.113a1.5 1.5 0 0 0-1.485-.62l-.747-1.028a1.5 1.5 0 0 1 0-1.875l.747-1.028c.335-.465.933-.71 1.485-.62l1.113.08c.124.093.242.19.356.292.115.102.223.21.32.324l.747 1.028a1.5 1.5 0 0 0 1.875 0l.747-1.028a1.5 1.5 0 0 1 1.664-2.22l1.113.08c.602.09 1.15-.155 1.485-.62l.747-1.028a1.5 1.5 0 0 0 0-1.875l-.747-1.028c-.335-.465-.933-.71-1.485-.62l-1.113.08c-.124.093-.242-.19-.356-.292-.115-.102-.223-.21-.32.324l-.747 1.028a1.5 1.5 0 0 1-1.875 0l-.747-1.028a1.5 1.5 0 0 0-1.664-2.22z" /></svg>
                 <span>Settings</span>
@@ -290,7 +311,7 @@
         </nav>
     </div>
 
-    
+    <!-- Name Input Modal -->
     <div id="name-modal" class="modal-screen">
         <div class="modal-content">
             <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">Welcome, Farmer!</h2>
@@ -302,13 +323,13 @@
         </div>
     </div>
 
-    
+    <!-- Modal Screens -->
     <div id="upgrades-screen" class="modal-screen">
         <div class="modal-content">
             <button class="close-modal-btn">&times;</button>
             <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">Upgrades</h2>
             <div id="upgrades-list" class="modal-body space-y-4">
-                
+                <!-- Upgrades will be dynamically inserted here -->
             </div>
         </div>
     </div>
@@ -318,7 +339,7 @@
             <button class="close-modal-btn">&times;</button>
             <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">The Coop</h2>
             <div id="coop-list" class="modal-body space-y-4">
-                
+                <!-- Chickens will be dynamically inserted here -->
             </div>
         </div>
     </div>
@@ -341,6 +362,31 @@
             </div>
         </div>
     </div>
+
+    <div id="help-screen" class="modal-screen">
+        <div class="modal-content">
+            <button class="close-modal-btn">&times;</button>
+            <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">How to Play</h2>
+            <div class="modal-body">
+                <h3>Core Currencies & Stats</h3>
+                <p><strong>Eggs:</strong> The primary currency of the game. Earned by clicking the chicken and through automatic production (EPS). Used to buy most upgrades and chickens.</p>
+                <p><strong>Golden Feathers:</strong> A premium currency used to purchase powerful, specific upgrades like the "Golden Loom". Primarily earned by owning Silkie Chickens.</p>
+                <p><strong>Reputation:</strong> The prestige currency. Earned by "Selling the Coop" (prestiging). Each point provides a permanent production bonus to both your automatic and manual egg generation.</p>
+                <p><strong>EPS (Eggs Per Second):</strong> The total number of eggs you generate automatically every second from your chickens and upgrades. This is the main driver of progress in the mid-to-late game.</p>
+                <p><strong>EPC (Eggs Per Click):</strong> The total number of eggs you receive for each manual click on the chicken. This is your primary source of income at the start of the game.</p>
+                
+                <h3>Key Concepts & Mechanics</h3>
+                <p><strong>Upgrades:</strong> Permanent improvements that boost your production or unlock new game mechanics. They are purchased from the "Upgrades" screen.</p>
+                <p><strong>The Coop:</strong> The screen where you can purchase different types of specialized chickens. Each chicken provides a unique bonus, such as increasing EPS, finding Golden Feathers, or generating Reputation.</p>
+                <p><strong>Prestige ("Sell the Coop"):</strong> A core mechanic in idle games. When you reach a certain threshold (1 Trillion eggs), you can choose to reset your current progress (eggs, upgrades, chickens) in exchange for <strong>Reputation</strong> points. This makes the next playthrough faster due to the permanent bonus Reputation provides.</p>
+                <p><strong>Golden Chicken:</strong> A special chicken that randomly appears on the screen. Clicking it before it disappears awards a large, instant bonus of Eggs, typically equal to a significant portion of your income.</p>
+                <p><strong>Colored Eggs:</strong> Rare, colored eggs that spawn randomly on the screen. Clicking one grants a powerful but temporary boost (a "buff"), such as making clicks stronger, discounting upgrades, or increasing the chance of finding Golden Feathers.</p>
+                <p><strong>Achievements:</strong> Milestones unlocked by reaching specific goals (e.g., total eggs earned, number of clicks, owning certain items). Each unlocked achievement provides a small, permanent, and multiplicative bonus to all egg production.</p>
+                <p><strong>Buff:</strong> A temporary positive effect on your game, usually granted by clicking a Colored Egg.</p>
+                <p><strong>Hard Reset:</strong> An option in the settings menu to completely and permanently erase all your save data and start the game over from the very beginning.</p>
+            </div>
+        </div>
+    </div>
     
     <div id="settings-screen" class="modal-screen">
         <div class="modal-content">
@@ -351,10 +397,50 @@
                     <label for="nickname-input" class="funky-font text-2xl text-white" style="text-shadow: 2px 2px 0px var(--saddle-brown);">Nickname</label>
                     <input type="text" id="nickname-input" placeholder="Enter Your Nickname" class="w-full text-center funky-font bg-white/80 border-4 border-[#8B4513] rounded-lg p-2 text-xl text-[#8B4513] placeholder:text-gray-500/80 focus:outline-none focus:ring-2 focus:ring-yellow-400">
                 </div>
+
+                <div>
+                    <h3 class="funky-font text-2xl text-white" style="text-shadow: 2px 2px 0px var(--saddle-brown);">Save Management</h3>
+                    <div class="grid grid-cols-2 gap-2 mt-2">
+                        <button id="export-save-clipboard" class="funky-button bg-blue-500 text-white text-sm">To Clipboard</button>
+                        <button id="export-save-file" class="funky-button bg-blue-500 text-white text-sm">To File</button>
+                    </div>
+                    <textarea id="import-save-text" class="w-full mt-2 p-2 rounded-lg border-2 border-gray-400" rows="3" placeholder="Paste save data here..."></textarea>
+                    <div class="grid grid-cols-2 gap-2 mt-2">
+                        <button id="import-save-text-btn" class="funky-button bg-green-500 text-white text-sm">From Text</button>
+                        <button id="import-save-file-btn" class="funky-button bg-green-500 text-white text-sm">From File</button>
+                        <input type="file" id="import-file-input" class="hidden" accept=".txt, .sav">
+                    </div>
+                </div>
+
                 <div>
                     <h3 class="funky-font text-2xl text-white" style="text-shadow: 2px 2px 0px var(--saddle-brown);">Danger Zone</h3>
                      <button id="reset-button" class="w-full mt-2 funky-button bg-red-600 text-white">Hard Reset Game</button>
                 </div>
+                
+                <div>
+                    <details class="changelog-details text-sm text-gray-800 bg-white/50 p-2 rounded-lg">
+                        <summary class="font-bold text-gray-800 cursor-pointer">Changelog</summary>
+                        <div class="mt-2 space-y-2 text-xs">
+                            <h4>Version 2.5 (Totoro)</h4>
+                            <ul class="list-disc pl-5">
+                                <li>Added a comprehensive "Help" screen.</li>
+                                <li>Implemented save import/export functionality.</li>
+                                <li>Fixed a critical bug related to the "Nest Egg IRA" upgrade causing `Infinity` eggs.</li>
+                                <li>Corrected the "Doja Cow's" Super Click chain bonus logic.</li>
+                                <li>Fixed non-functional "Discount" and "Feather Frenzy" buffs.</li>
+                                <li>Ensured the "Hard Reset" achievement is now obtainable.</li>
+                                <li>Updated save file key to v2.5.</li>
+                            </ul>
+                             <h4>Version 2.4 (DOJACOW)</h4>
+                            <ul class="list-disc pl-5">
+                                <li>Merged all project files into a single `index.html` for simplicity.</li>
+                                <li>Fixed a critical bug preventing upgrade/coop colors from displaying.</li>
+                            </ul>
+                            <!-- Add more versions as needed -->
+                        </div>
+                    </details>
+                </div>
+
                 <div>
                     <details class="license-details text-sm text-gray-800 bg-white/50 p-2 rounded-lg">
                         <summary id="license-summary" class="font-bold text-gray-800 cursor-pointer">MIT License</summary>
@@ -367,13 +453,13 @@
                     </details>
                 </div>
                 <div class="text-center text-gray-600">
-                    <p>Version: <span id="version-number">2.4</span></p>
+                    <p>Version: <span id="version-number">2.5 Totoro</span></p>
                 </div>
             </div>
         </div>
     </div>
 
-    
+    <!-- Floating text and other dynamic elements -->
     <div id="achievement-screenshot-template">
         <h2 class="funky-font text-4xl text-center" style="text-shadow: 3px 3px 0px var(--saddle-brown);">Achievement Unlocked!</h2>
         <div class="text-center mt-4">
@@ -401,11 +487,12 @@
     </div>
 
     <script type="module">
-        
-        
+        // --- Single-File Merged JavaScript for Chicken Clicker ---
+
+        // --- config.js content ---
         const CONFIG = {
-            SAVE_KEY: 'chickenClickerSave_v2.4', 
-            GAME_VERSION: '2.4', 
+            SAVE_KEY: 'chickenClickerSave_v2.5', // Updated save key for the new version
+            GAME_VERSION: '2.5 Totoro', // Updated version number
             GAME_TICK_INTERVAL: 0.1,
             SAVE_INTERVAL: 5,
             GOLDEN_CHICKEN_SPAWN_INTERVAL: 60,
@@ -421,7 +508,7 @@
                 eggstraClicks: { name: 'Eggstra Clicks', desc: 'Each click has a chance to be 10x stronger.', baseCost: 50000, exponent: 1.25, currency: 'eggs', color: 'pink' },
                 cluckworkAutomation: { name: 'Cluckwork Automation', desc: 'Boosts EPS by 5% for every building owned.', baseCost: 1e6, exponent: 2, currency: 'eggs', color: 'purple' },
                 peckingOrder: { name: 'Pecking Order', desc: 'A flat +10% boost to both clicks and EPS.', baseCost: 1e7, exponent: 1.5, currency: 'eggs', color: 'indigo' },
-                nestEggIRA: { name: 'Nest Egg IRA', desc: 'Earn 0.1% of your current eggs as interest per second.', baseCost: 1e9, exponent: 2.5, currency: 'eggs', color: 'teal' },
+                nestEggIRA: { name: 'Nest Egg IRA', desc: 'Earn 0.1% of your base EPS as interest per second (capped).', baseCost: 1e9, exponent: 2.5, currency: 'eggs', color: 'teal' },
                 fowlLanguage: { name: 'Fowl Language', desc: 'The chicken occasionally squawks insults. Essential.', baseCost: 1e12, exponent: 10, currency: 'eggs', color: 'red' }
             },
             CHICKENS: {
@@ -535,17 +622,21 @@
             eggCollector: (gs) => Object.keys(CONFIG.COLORED_EGGS).every(c => gs.clickedColoredEggs[c]),
         };
 
-        
+        // --- utils.js content ---
         function formatNumber(num) {
-            if (num === Infinity) return 'Infinity';
+            if (num === null || isNaN(num) || !isFinite(num)) return '0';
             if (num < 1000) return num.toFixed(0);
             const suffixes = ["", "K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No", "Dc"];
             const i = Math.floor(Math.log10(num) / 3);
             if (i >= suffixes.length) return num.toExponential(2);
             return (num / Math.pow(1000, i)).toFixed(2) + suffixes[i];
         }
-        function calculateCost(base, level, exponent = 1.15) {
-            return Math.floor(base * Math.pow(exponent, level));
+        function calculateCost(base, level, exponent = 1.15, gameState) {
+            let cost = Math.floor(base * Math.pow(exponent, level));
+            if (gameState && gameState.activeBuffs.discount) {
+                cost = Math.floor(cost * (1 - gameState.activeBuffs.discount.value));
+            }
+            return cost;
         }
         function generateAchievementScreenshot(id, gameState) {
             if (!id || !achievements[id]) return;
@@ -565,14 +656,19 @@
             });
         };
         const getAchievementBonus = (gs) => gs.unlockedAchievements.reduce((total, id) => total * (achievements[id]?.bonus || 1), 1);
-        const getReputationBonus = (gs) => 1 + gs.reputation * 0.05 + (gs.chickens.wyandotte * 0.05);
+        const getReputationBonus = (gs) => 1 + (gs.reputation || 0) * 0.05 + (gs.chickens.wyandotte * 0.05);
         const getEventModifier = (gs) => gs.event.active ? gs.event.modifier : 1;
         const getBuffModifier = (gs, buffType, defaultValue = 1) => (gs.activeBuffs[buffType] ? gs.activeBuffs[buffType].value : defaultValue);
         const getBoostMultiplier = (gs) => getBuffModifier(gs, 'boostMultiplier');
-        const getEggsPerSecond = (gs) => {
+        const getBaseEggsPerSecond = (gs) => {
             let baseEps = gs.upgrades.worker * gs.chickens.leghorn * 1;
             baseEps += gs.chickens.brahma * (baseEps * 5);
-            const nestEggInterest = gs.upgrades.nestEggIRA > 0 ? gs.eggs * 0.001 * gs.upgrades.nestEggIRA : 0;
+            return baseEps;
+        }
+        const getEggsPerSecond = (gs) => {
+            const baseEps = getBaseEggsPerSecond(gs);
+            const interestCap = baseEps > 0 ? baseEps * 10 : 1000;
+            const nestEggInterest = gs.upgrades.nestEggIRA > 0 ? Math.min(baseEps * 0.001 * gs.upgrades.nestEggIRA, interestCap) : 0;
             const peckingOrderBonus = 1 + (gs.upgrades.peckingOrder * 0.1);
             const bantyBonus = Math.pow(1.1, gs.chickens.banty);
             const totalBuildings = Object.values(gs.upgrades).reduce((a, b) => a + b, 0) + Object.values(gs.chickens).reduce((a, b) => a + b, 0);
@@ -587,7 +683,7 @@
             return Math.floor(baseEpc * loomBoost * getAchievementBonus(gs) * getReputationBonus(gs) * getEventModifier(gs) * getBoostMultiplier(gs) * gs.permanentBonus * peckingOrderBonus * bantyBonus * getBuffModifier(gs, 'clickFrenzy'));
         };
 
-        
+        // --- ui.js content ---
         const elements = {
             nicknameInput: document.getElementById('nickname-input'),
             chicken: document.getElementById('chicken'),
@@ -613,7 +709,13 @@
             upgradesListContainer: document.getElementById('upgrades-list'),
             coopListContainer: document.getElementById('coop-list'),
             coloredEggContainer: document.getElementById('colored-egg-container'),
-            versionNumberEl: document.getElementById('version-number')
+            versionNumberEl: document.getElementById('version-number'),
+            exportSaveClipboardBtn: document.getElementById('export-save-clipboard'),
+            exportSaveFileBtn: document.getElementById('export-save-file'),
+            importSaveText: document.getElementById('import-save-text'),
+            importSaveTextBtn: document.getElementById('import-save-text-btn'),
+            importSaveFileBtn: document.getElementById('import-save-file-btn'),
+            importFileInput: document.getElementById('import-file-input'),
         };
         function buildUpgradeShop() {
             elements.upgradesListContainer.innerHTML = '';
@@ -661,7 +763,7 @@
                 if (!levelEl || !costEl || !buttonEl) continue;
 
                 levelEl.textContent = formatNumber(gameState.upgrades[id]);
-                const cost = calculateCost(upgrade.baseCost, gameState.upgrades[id], upgrade.exponent);
+                const cost = calculateCost(upgrade.baseCost, gameState.upgrades[id], upgrade.exponent, gameState);
                 costEl.textContent = formatNumber(cost);
                 buttonEl.disabled = gameState[upgrade.currency] < cost;
             }
@@ -674,7 +776,7 @@
                 if (!ownedEl || !costEl || !buttonEl) continue;
 
                 ownedEl.textContent = formatNumber(gameState.chickens[id]);
-                const cost = calculateCost(chicken.baseCost, gameState.chickens[id], chicken.exponent);
+                const cost = calculateCost(chicken.baseCost, gameState.chickens[id], chicken.exponent, gameState);
                 costEl.textContent = formatNumber(cost);
                 buttonEl.disabled = gameState.eggs < cost;
             }
@@ -743,7 +845,7 @@
             }, 1450);
         };
 
-        
+        // --- game.js content ---
         let gameState = {};
         const initialGameState = {
             nickname: null, eggs: 0, totalEggs: 0, feathers: 0, totalFeathers: 0, totalClicks: 0,
@@ -780,7 +882,7 @@
                     gameState.superClickChain = 0;
                 }
                 gameState.lastSuperClickTime = now;
-                const superClickBonus = (getEggsPerSecond(gameState) * 3600) / Math.pow(2, gameState.superClickChain);
+                const superClickBonus = (getEggsPerSecond(gameState) * 3600) * (1 + gameState.superClickChain * 0.1);
                 gameState.eggs += superClickBonus;
                 gameState.totalEggs += superClickBonus;
                 showFloatingText(`+${formatNumber(superClickBonus)}!`, event, true);
@@ -791,7 +893,7 @@
 
         function buyUpgrade(id) {
             const upgrade = CONFIG.UPGRADES[id];
-            const cost = calculateCost(upgrade.baseCost, gameState.upgrades[id], upgrade.exponent);
+            const cost = calculateCost(upgrade.baseCost, gameState.upgrades[id], upgrade.exponent, gameState);
             if (gameState[upgrade.currency] >= cost) {
                 gameState[upgrade.currency] -= cost;
                 gameState.upgrades[id]++;
@@ -802,7 +904,7 @@
 
         function buyChicken(id) {
             const chicken = CONFIG.CHICKENS[id];
-            const cost = calculateCost(chicken.baseCost, gameState.chickens[id], chicken.exponent);
+            const cost = calculateCost(chicken.baseCost, gameState.chickens[id], chicken.exponent, gameState);
             if (gameState.eggs >= cost) {
                 gameState.eggs -= cost;
                 gameState.chickens[id]++;
@@ -886,6 +988,13 @@
             const savedState = localStorage.getItem(CONFIG.SAVE_KEY);
             gameState = savedState ? JSON.parse(savedState) : { ...initialGameState };
             gameState = deepMerge(initialGameState, gameState);
+
+            const resetCount = localStorage.getItem('chickenClickerResetCount');
+            if (resetCount) {
+                gameState.resets = parseInt(resetCount, 10);
+                localStorage.removeItem('chickenClickerResetCount');
+            }
+
             if (!gameState.nickname) {
                 elements.nameModal.style.display = 'flex';
             } else {
@@ -910,46 +1019,103 @@
         function isObject(item) { return (item && typeof item === 'object' && !Array.isArray(item)); }
         function hardReset() {
             if (confirm("Are you sure you want to completely reset your game? This cannot be undone.")) {
-                gameState.resets = (gameState.resets || 0) + 1;
-                saveGame(); 
+                localStorage.setItem('chickenClickerResetCount', (gameState.resets || 0) + 1);
                 localStorage.removeItem(CONFIG.SAVE_KEY);
                 location.reload();
             }
         }
+        
+        function exportSave(toFile = false) {
+            try {
+                const saveString = btoa(JSON.stringify(gameState));
+                if (toFile) {
+                    const blob = new Blob([saveString], {type: "text/plain;charset=utf-8"});
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = `chicken_clicker_save_${Date.now()}.txt`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    showToast("Success", "Save file downloaded!");
+                } else {
+                    navigator.clipboard.writeText(saveString).then(() => {
+                        showToast("Success", "Save data copied to clipboard!");
+                    }, () => {
+                        showToast("Error", "Could not copy to clipboard.");
+                    });
+                }
+            } catch (e) {
+                showToast("Error", "Could not export save data.");
+                console.error("Export failed:", e);
+            }
+        }
+
+        function importSave(saveString) {
+            if (!saveString) {
+                showToast("Error", "No save data provided.");
+                return;
+            }
+            try {
+                const decodedString = atob(saveString);
+                const newGameState = JSON.parse(decodedString);
+                
+                // Basic validation
+                if (typeof newGameState.eggs !== 'number' || typeof newGameState.upgrades.worker !== 'number') {
+                    throw new Error("Invalid save file structure.");
+                }
+
+                localStorage.setItem(CONFIG.SAVE_KEY, decodedString);
+                showToast("Success", "Game imported! Reloading...");
+                setTimeout(() => location.reload(), 1500);
+
+            } catch (e) {
+                showToast("Error", "Invalid or corrupt save data.");
+                console.error("Import failed:", e);
+            }
+        }
+
 
         function gameLoop() {
-            const secondsPassed = CONFIG.GAME_TICK_INTERVAL;
-            const eps = getEggsPerSecond(gameState);
-            gameState.eggs += eps * secondsPassed;
-            gameState.totalEggs += eps * secondsPassed;
-            gameState.timePlayed += secondsPassed;
-            gameState.timeSinceLastClick = (gameState.timeSinceLastClick || 0) + secondsPassed;
-            for (const buff in gameState.activeBuffs) {
-                if (gameState.activeBuffs[buff].duration > 0) {
-                    gameState.activeBuffs[buff].duration -= secondsPassed;
-                    if (gameState.activeBuffs[buff].duration <= 0) delete gameState.activeBuffs[buff];
+            try {
+                const secondsPassed = CONFIG.GAME_TICK_INTERVAL;
+                const eps = getEggsPerSecond(gameState);
+                gameState.eggs += eps * secondsPassed;
+                gameState.totalEggs += eps * secondsPassed;
+                gameState.timePlayed += secondsPassed;
+                gameState.timeSinceLastClick = (gameState.timeSinceLastClick || 0) + secondsPassed;
+                for (const buff in gameState.activeBuffs) {
+                    if (gameState.activeBuffs[buff].duration > 0) {
+                        gameState.activeBuffs[buff].duration -= secondsPassed;
+                        if (gameState.activeBuffs[buff].duration <= 0) delete gameState.activeBuffs[buff];
+                    }
                 }
-            }
-            if(gameState.event.active) {
-                gameState.event.duration -= secondsPassed;
-                if(gameState.event.duration <= 0) gameState.event.active = false;
-            }
-            const featherChance = 0.1 + (gameState.upgrades.featherForecast * 0.01);
-            if(Math.random() < (gameState.chickens.silkie * featherChance * secondsPassed)) {
-                gameState.feathers++;
-                gameState.totalFeathers++;
-            }
-            gameState.reputation += gameState.chickens.rooster * 0.01 * secondsPassed;
-            if (gameState.chickens.serama > 0 && Math.random() < (gameState.chickens.serama * 0.01 * secondsPassed)) {
-                let cheapest = null, minCost = Infinity;
-                for(const id in CONFIG.UPGRADES) {
-                    const cost = calculateCost(CONFIG.UPGRADES[id].baseCost, gameState.upgrades[id], CONFIG.UPGRADES[id].exponent);
-                    if(cost < minCost) { minCost = cost; cheapest = id; }
+                if(gameState.event.active) {
+                    gameState.event.duration -= secondsPassed;
+                    if(gameState.event.duration <= 0) gameState.event.active = false;
                 }
-                if(cheapest) gameState.upgrades[cheapest]++;
+                const featherChance = 0.1 + (gameState.upgrades.featherForecast * 0.01);
+                const featherFrenzyBonus = getBuffModifier(gameState, 'featherFrenzy');
+                if(Math.random() < (gameState.chickens.silkie * featherChance * featherFrenzyBonus * secondsPassed)) {
+                    gameState.feathers++;
+                    gameState.totalFeathers++;
+                }
+                gameState.reputation += gameState.chickens.rooster * 0.01 * secondsPassed;
+                if (gameState.chickens.serama > 0 && Math.random() < (gameState.chickens.serama * 0.01 * secondsPassed)) {
+                    let cheapest = null, minCost = Infinity;
+                    for(const id in CONFIG.UPGRADES) {
+                        const cost = calculateCost(CONFIG.UPGRADES[id].baseCost, gameState.upgrades[id], CONFIG.UPGRADES[id].exponent, gameState);
+                        if(cost < minCost) { minCost = cost; cheapest = id; }
+                    }
+                    if(cheapest) gameState.upgrades[cheapest]++;
+                }
+                updateUI(gameState);
+                checkAchievements();
+            } catch (error) {
+                console.error("Game loop crashed:", error);
+                // In a real scenario, you might want to stop the interval here
             }
-            updateUI(gameState);
-            checkAchievements();
         }
 
         function checkAchievements() {
@@ -969,7 +1135,12 @@
                     const { nickname, unlockedAchievements, permanentBonus, resets } = gameState;
                     const eggsForPrestige = Math.floor(Math.sqrt(gameState.totalEggs / 1e11));
                     const prestigeBuff = gameState.activeBuffs.prestigeBuff ? gameState.activeBuffs.prestigeBuff.value : 0;
-                    const newRep = gameState.reputation + Math.floor((eggsForPrestige > 0 ? eggsForPrestige : 1) * (1 + prestigeBuff));
+                    
+                    let newRep = (gameState.reputation || 0) + Math.floor((eggsForPrestige > 0 ? eggsForPrestige : 1) * (1 + prestigeBuff));
+                    if (!isFinite(newRep)) {
+                        newRep = gameState.reputation || 0; // Fallback if calculation results in Infinity
+                    }
+
                     const prestigeCount = (gameState.prestigeCount || 0) + 1;
                     const unlockedHidden = unlockedAchievements.filter(id => achievements[id]?.hidden);
                     
@@ -979,7 +1150,7 @@
                     newGameState.prestigeCount = prestigeCount;
                     newGameState.unlockedAchievements = unlockedHidden;
                     newGameState.permanentBonus = permanentBonus;
-                    newGameState.resets = resets; 
+                    newGameState.resets = resets; // Carry over the reset counter
                     gameState = newGameState;
 
                     saveGame();
@@ -1027,6 +1198,22 @@
             elements.prestigeButton.addEventListener('click', prestige);
             elements.resetButton.addEventListener('click', hardReset);
             elements.licenseSummary.addEventListener('click', () => { gameState.licenseClicked = true; });
+            
+            // Save/Import Listeners
+            elements.exportSaveClipboardBtn.addEventListener('click', () => exportSave(false));
+            elements.exportSaveFileBtn.addEventListener('click', () => exportSave(true));
+            elements.importSaveTextBtn.addEventListener('click', () => importSave(elements.importSaveText.value));
+            elements.importSaveFileBtn.addEventListener('click', () => elements.importFileInput.click());
+            elements.importFileInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => importSave(e.target.result);
+                    reader.readAsText(file);
+                }
+            });
+
+
             for (const id in CONFIG.UPGRADES) {
                 document.getElementById(`buy-${id}`).addEventListener('click', () => buyUpgrade(id));
             }
