@@ -19,12 +19,17 @@ The easiest way to play is to visit the official project URL:
 If you wish to run the game from the source files:
 
 1. Clone this repository or download the files.  
-2. Ensure index.html, style.css, and game.js are in the same directory.  
-3. Open index.html in any modern web browser.
+2. Ensure index.html, style.css, config.js, ui.js, and game.js are in the same directory.  
+3. Open index.html in any modern web browser. Note that due to the use of JS Modules, you may need to serve the files from a local web server.
 
 ## **Changelog**
 
-### **Version 2.2 (Current)**
+### **Version 2.3 (Current)**
+
+* **Refactor:** Broke down the monolithic game.js into three logical files: config.js for game balance, ui.js for DOM manipulation, and game.js for core logic. This greatly improves maintainability and makes debugging easier.  
+* **Housekeeping:** Updated version number to 2.3.
+
+### **Version 2.2**
 
 * **Feature:** Reworked "Doja Chicken" into "Doja Cow" with a new passive "Super Click" ability, replacing the temporary frenzy.  
 * **Bug Fix:** The player's name now correctly appears in the settings menu after being entered for the first time.  
