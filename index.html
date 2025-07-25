@@ -76,7 +76,7 @@
             to { opacity: 0; transform: translateY(-120px) rotate(15deg); }
         }
         .golden-chicken, .colored-egg {
-            position: absolute; /* Changed to absolute to be contained within app-wrapper */
+            position: absolute; /* Contained within app-wrapper */
             cursor: pointer;
             transition: transform 0.2s, opacity 0.5s;
             z-index: 100;
@@ -230,8 +230,10 @@
 </head>
 <body class="text-gray-800">
 
+    <!-- App Wrapper for Desktop View -->
     <div id="app-wrapper" class="w-full h-full md:max-w-lg md:h-[850px] md:relative md:border-8 md:border-[var(--saddle-brown)] md:rounded-2xl md:shadow-2xl md:overflow-hidden flex flex-col bg-cover bg-center" style="background-image: url('https://www.transparenttextures.com/patterns/hay-bale.png');">
     
+        <!-- Main Game Screen -->
         <div id="game-container" class="flex flex-col h-full relative">
             <div id="event-banner" class="funky-font text-xl md:text-2xl"></div>
             <div id="colored-egg-container" class="absolute inset-0"></div>
@@ -267,6 +269,7 @@
             </main>
         </div>
 
+        <!-- Bottom Navigation -->
         <nav class="bottom-nav md:absolute">
              <button class="nav-button" data-modal="upgrades-screen">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" /></svg>
@@ -287,6 +290,7 @@
         </nav>
     </div>
 
+    <!-- Name Input Modal -->
     <div id="name-modal" class="modal-screen">
         <div class="modal-content">
             <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">Welcome, Farmer!</h2>
@@ -298,12 +302,14 @@
         </div>
     </div>
 
+    <!-- Modal Screens -->
     <div id="upgrades-screen" class="modal-screen">
         <div class="modal-content">
             <button class="close-modal-btn">&times;</button>
             <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">Upgrades</h2>
             <div id="upgrades-list" class="modal-body space-y-4">
-                </div>
+                <!-- Upgrades will be dynamically inserted here -->
+            </div>
         </div>
     </div>
 
@@ -312,7 +318,8 @@
             <button class="close-modal-btn">&times;</button>
             <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">The Coop</h2>
             <div id="coop-list" class="modal-body space-y-4">
-                </div>
+                <!-- Chickens will be dynamically inserted here -->
+            </div>
         </div>
     </div>
 
@@ -360,12 +367,13 @@
                     </details>
                 </div>
                 <div class="text-center text-gray-600">
-                    <p>Version: <span id="version-number">2.3</span></p>
+                    <p>Version: <span id="version-number">2.4</span></p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Floating text and other dynamic elements -->
     <div id="achievement-screenshot-template">
         <h2 class="funky-font text-4xl text-center" style="text-shadow: 3px 3px 0px var(--saddle-brown);">Achievement Unlocked!</h2>
         <div class="text-center mt-4">
@@ -397,8 +405,8 @@
 
         // --- config.js content ---
         const CONFIG = {
-            SAVE_KEY: 'chickenClickerSave_v2.3_separated',
-            GAME_VERSION: '2.3',
+            SAVE_KEY: 'chickenClickerSave_v2.4', // Updated save key for the new version
+            GAME_VERSION: '2.4', // Updated version number
             GAME_TICK_INTERVAL: 0.1,
             SAVE_INTERVAL: 5,
             GOLDEN_CHICKEN_SPAWN_INTERVAL: 60,
@@ -903,8 +911,8 @@
         function isObject(item) { return (item && typeof item === 'object' && !Array.isArray(item)); }
         function hardReset() {
             if (confirm("Are you sure you want to completely reset your game? This cannot be undone.")) {
-                // This is where you would increment a reset counter if you wanted to fix the achievement.
-                // For example: gameState.resets = (gameState.resets || 0) + 1;
+                gameState.resets = (gameState.resets || 0) + 1;
+                saveGame(); // Save the incremented reset count before reloading
                 localStorage.removeItem(CONFIG.SAVE_KEY);
                 location.reload();
             }
@@ -959,7 +967,7 @@
         function prestige() {
             if (gameState.eggs >= CONFIG.PRESTIGE_COST) {
                 if(confirm(`Are you sure you want to sell the coop? This will reset your eggs, upgrades, and chickens for Reputation points.`)){
-                    const { nickname, unlockedAchievements, permanentBonus } = gameState;
+                    const { nickname, unlockedAchievements, permanentBonus, resets } = gameState;
                     const eggsForPrestige = Math.floor(Math.sqrt(gameState.totalEggs / 1e11));
                     const prestigeBuff = gameState.activeBuffs.prestigeBuff ? gameState.activeBuffs.prestigeBuff.value : 0;
                     const newRep = gameState.reputation + Math.floor((eggsForPrestige > 0 ? eggsForPrestige : 1) * (1 + prestigeBuff));
@@ -972,6 +980,7 @@
                     newGameState.prestigeCount = prestigeCount;
                     newGameState.unlockedAchievements = unlockedHidden;
                     newGameState.permanentBonus = permanentBonus;
+                    newGameState.resets = resets; // Carry over the reset counter
                     gameState = newGameState;
 
                     saveGame();

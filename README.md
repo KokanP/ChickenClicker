@@ -18,13 +18,21 @@ The easiest way to play is to visit the official project URL:
 
 If you wish to run the game from the source files:
 
-1. Clone this repository or download the files.  
-2. Ensure index.html, style.css, config.js, ui.js, and game.js are in the same directory.  
-3. Open index.html in any modern web browser. Note that due to the use of JS Modules, you may need to serve the files from a local web server.
+1. Clone this repository or download the project.  
+2. Open the index.html file in any modern web browser.
+
+*(The multi-file version is still available in the project history for reference.)*
 
 ## **Changelog**
 
-### **Version 2.3 (Current)**
+### **Version 2.4 (Hotfix & Consolidation)**
+
+* **Project Consolidation:** Merged all separate JavaScript (game.js, ui.js, utils.js, config.js) and CSS (style.css) files into a single, self-contained index.html. This simplifies local usage, eliminates potential browser module loading issues, and makes the project easier to share and debug.  
+* **Bug Fix (Critical):** Corrected a major issue where upgrade and coop item colors were not displaying. The dynamic generation of Tailwind CSS classes (e.g., bg-${color}-500) was preventing the Just-In-Time compiler from including the necessary styles. The new single-file structure resolves this.  
+* **Bug Fix:** Fixed a logic error that made the "What Did It Do To You?" (Hard Reset) achievement impossible to obtain.  
+* **Housekeeping:** Synchronized copyright information across files and replaced an invalid alt attribute on the chicken SVG with a more accessible \<title\> tag.
+
+### **Version 2.3**
 
 * **Refactor:** Broke down the monolithic game.js into three logical files: config.js for game balance, ui.js for DOM manipulation, and game.js for core logic. This greatly improves maintainability and makes debugging easier.  
 * **Housekeeping:** Updated version number to 2.3.
