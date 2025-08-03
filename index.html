@@ -248,10 +248,8 @@
 </head>
 <body class="text-gray-800">
 
-    <!-- App Wrapper for Desktop View -->
     <div id="app-wrapper" class="w-full h-full md:max-w-lg md:h-[850px] md:relative md:border-8 md:border-[var(--saddle-brown)] md:rounded-2xl md:shadow-2xl md:overflow-hidden flex flex-col bg-cover bg-center" style="background-image: url('https://www.transparenttextures.com/patterns/hay-bale.png');">
     
-        <!-- Main Game Screen -->
         <div id="game-container" class="flex flex-col h-full relative">
             <div id="event-banner" class="funky-font text-xl md:text-2xl"></div>
             <div id="colored-egg-container" class="absolute inset-0"></div>
@@ -287,7 +285,6 @@
             </main>
         </div>
 
-        <!-- Bottom Navigation -->
         <nav class="bottom-nav md:absolute">
              <button class="nav-button" data-modal="upgrades-screen">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" /></svg>
@@ -312,7 +309,6 @@
         </nav>
     </div>
 
-    <!-- Name Input Modal -->
     <div id="name-modal" class="modal-screen">
         <div class="modal-content">
             <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">Welcome, Farmer!</h2>
@@ -324,14 +320,12 @@
         </div>
     </div>
 
-    <!-- Modal Screens -->
     <div id="upgrades-screen" class="modal-screen">
         <div class="modal-content">
             <button class="close-modal-btn">&times;</button>
             <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">Upgrades</h2>
             <div id="upgrades-list" class="modal-body space-y-4">
-                <!-- Upgrades will be dynamically inserted here -->
-            </div>
+                </div>
         </div>
     </div>
 
@@ -340,8 +334,7 @@
             <button class="close-modal-btn">&times;</button>
             <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">The Coop</h2>
             <div id="coop-list" class="modal-body space-y-4">
-                <!-- Chickens will be dynamically inserted here -->
-            </div>
+                </div>
         </div>
     </div>
 
@@ -357,6 +350,10 @@
                         <h4 class="text-2xl funky-font">Sell the Coop</h4>
                         <p class="text-gray-600 mb-2">Reset progress for a permanent production boost. Requires 1 Trillion eggs.</p>
                         <p>Reputation: <span id="reputation-points" class="font-bold">0</span> (+<span id="reputation-bonus" class="font-bold">0</span>% bonus)</p>
+                        <p class="text-sm text-gray-500">Achievement Bonus: <span id="achievement-bonus-ui" class="font-bold">+0</span>%</p>
+                        <p class="text-sm text-gray-500">Permanent Bonus: <span id="permanent-bonus-ui" class="font-bold">x1.00</span></p>
+                        <hr class="my-1 border-purple-400">
+                        <p class="font-bold">Total Production Multiplier: <span id="total-multiplier-ui" class="font-bold">x1.00</span></p>
                         <button id="prestige-button" class="w-full mt-2 funky-button bg-purple-600 text-white">Sell Coop</button>
                     </div>
                 </div>
@@ -422,6 +419,14 @@
                     <details class="changelog-details text-sm text-gray-800 bg-white/50 p-2 rounded-lg">
                         <summary class="font-bold text-gray-800 cursor-pointer">Changelog</summary>
                         <div class="mt-2 space-y-2 text-xs">
+                            <h4>Version 2.6 (Tarzan)</h4>
+                            <ul class="list-disc pl-5">
+                                <li><strong>Balance:</strong> Changed achievement bonuses from multiplicative to additive to prevent runaway late-game scaling.</li>
+                                <li><strong>UI:</strong> The prestige menu now displays a full breakdown of all permanent production multipliers for better clarity.</li>
+                                <li><strong>Feature:</strong> Implemented the previously non-functional "Orpington Oracle" chicken. It now provides a random egg bonus every 10 minutes.</li>
+                                <li><strong>Fix:</strong> The "Wyandotte Warrior" now correctly increases Reputation gained on prestige, as described.</li>
+                                <li><strong>Housekeeping:</strong> Updated version number and save key to 2.6.</li>
+                            </ul>
                             <h4>Version 2.5 (Totoro)</h4>
                             <ul class="list-disc pl-5">
                                 <li>Added a comprehensive "Help" screen.</li>
@@ -437,8 +442,7 @@
                                 <li>Merged all project files into a single `index.html` for simplicity.</li>
                                 <li>Fixed a critical bug preventing upgrade/coop colors from displaying.</li>
                             </ul>
-                            <!-- Add more versions as needed -->
-                        </div>
+                            </div>
                     </details>
                 </div>
 
@@ -454,13 +458,12 @@
                     </details>
                 </div>
                 <div class="text-center text-gray-600">
-                    <p>Version: <span id="version-number">2.5 Totoro</span></p>
+                    <p>Version: <span id="version-number">2.6 Tarzan</span></p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Floating text and other dynamic elements -->
     <div id="achievement-screenshot-template">
         <h2 class="funky-font text-4xl text-center" style="text-shadow: 3px 3px 0px var(--saddle-brown);">Achievement Unlocked!</h2>
         <div class="text-center mt-4">
@@ -492,8 +495,8 @@
 
         // --- config.js content ---
         const CONFIG = {
-            SAVE_KEY: 'chickenClickerSave_v2.5', // Updated save key for the new version
-            GAME_VERSION: '2.5 Totoro', // Updated version number
+            SAVE_KEY: 'chickenClickerSave_v2.6', // Updated save key for the new version
+            GAME_VERSION: '2.6 Tarzan', // Updated version number
             GAME_TICK_INTERVAL: 0.1,
             SAVE_INTERVAL: 5,
             GOLDEN_CHICKEN_SPAWN_INTERVAL: 60,
@@ -656,8 +659,14 @@
                 link.click();
             });
         };
-        const getAchievementBonus = (gs) => gs.unlockedAchievements.reduce((total, id) => total * (achievements[id]?.bonus || 1), 1);
-        const getReputationBonus = (gs) => 1 + (gs.reputation || 0) * 0.05 + (gs.chickens.wyandotte * 0.05);
+        const getAchievementBonus = (gs) => {
+            const totalBonus = gs.unlockedAchievements.reduce((sum, id) => {
+                const bonusValue = achievements[id]?.bonus || 1;
+                return sum + (bonusValue - 1);
+            }, 0);
+            return 1 + totalBonus;
+        };
+        const getReputationBonus = (gs) => 1 + (gs.reputation || 0) * 0.05;
         const getEventModifier = (gs) => gs.event.active ? gs.event.modifier : 1;
         const getBuffModifier = (gs, buffType, defaultValue = 1) => (gs.activeBuffs[buffType] ? gs.activeBuffs[buffType].value : defaultValue);
         const getBoostMultiplier = (gs) => getBuffModifier(gs, 'boostMultiplier');
@@ -786,6 +795,19 @@
             elements.reputationBonusEl.textContent = ((getReputationBonus(gameState) - 1) * 100).toFixed(0);
             elements.prestigeButton.disabled = gameState.eggs < CONFIG.PRESTIGE_COST;
             
+            // --- New UI logic for bonus breakdown ---
+            const achBonus = getAchievementBonus(gameState);
+            const repBonus = getReputationBonus(gameState);
+            const permBonus = gameState.permanentBonus;
+
+            const achBonusUI = document.getElementById('achievement-bonus-ui');
+            const permBonusUI = document.getElementById('permanent-bonus-ui');
+            const totalMultiplierUI = document.getElementById('total-multiplier-ui');
+
+            if (achBonusUI) achBonusUI.textContent = `+${((achBonus - 1) * 100).toFixed(0)}`;
+            if (permBonusUI) permBonusUI.textContent = `x${permBonus.toFixed(2)}`;
+            if (totalMultiplierUI) totalMultiplierUI.textContent = `x${(achBonus * repBonus * permBonus).toFixed(2)}`;
+
             if(gameState.event.active) {
                 elements.eventBanner.style.display = 'block';
                 elements.eventBanner.textContent = `${gameState.event.type}! ${Math.ceil(gameState.event.duration)}s left!`;
@@ -862,6 +884,7 @@
             goldenChickensClicked: 0, prestigeCount: 0, resets: 0,
             event: { active: false, type: null, duration: 0, modifier: 1 },
             activeBuffs: {}, permanentBonus: 1, clickedColoredEggs: {},
+            oracleTimer: 0,
             lastSuperClickTime: 0, superClickChain: 0, modalOpens: 0, timeSinceLastClick: 0,
         };
 
@@ -971,7 +994,7 @@
                 case 'instantGain': const gain = getEggsPerSecond(gameState) * egg.value; gameState.eggs += gain; gameState.totalEggs += gain; bonusDescription = `Instantly gained ${formatNumber(gain)} eggs!`; break;
                 case 'featherFrenzy': bonusDescription = `Golden Feather chance is doubled for ${egg.duration / 60} minutes!`; break;
                 case 'goldRush': bonusDescription = `A rush of ${egg.value} Golden Chickens has appeared!`; for(let i=0; i<egg.value; i++) spawnGoldenChicken(); break;
-                case 'boostMultiplier': bonusDescription = `All active boosts are doubled for ${egg.duration} seconds!`; break;
+                case 'boostMultiplier': bonusDescription = `All egg production is doubled for ${egg.duration} seconds!`; break;
                 case 'superClickFrenzy': bonusDescription = `Super Click chance is doubled for ${egg.duration} seconds!`; break;
                 case 'prestigeBuff': bonusDescription = `Your next prestige will grant an extra ${egg.value * 100}% Reputation!`; break;
                 case 'prestigePercent': const prestigeGain = CONFIG.PRESTIGE_COST * egg.value; gameState.eggs += prestigeGain; gameState.totalEggs += prestigeGain; bonusDescription = `Gained ${formatNumber(prestigeGain)} eggs toward your next prestige!`; break;
@@ -1111,6 +1134,25 @@
                     }
                     if(cheapest) gameState.upgrades[cheapest]++;
                 }
+
+                // Orpington Oracle Logic (10 minutes = 600 seconds)
+                if (gameState.chickens.orpington > 0) {
+                    gameState.oracleTimer = (gameState.oracleTimer || 0) + secondsPassed;
+                    if (gameState.oracleTimer >= 600) {
+                        const oracles = gameState.chickens.orpington;
+                        const baseBonus = getEggsPerSecond(gameState) * 1800; // Bonus is 30 minutes of EPS
+                        const randomMultiplier = Math.random() + 0.5; // Adds randomness from 0.5x to 1.5x
+                        const totalBonus = Math.floor(baseBonus * oracles * randomMultiplier);
+
+                        if (totalBonus > 0) {
+                            gameState.eggs += totalBonus;
+                            gameState.totalEggs += totalBonus;
+                            showToast("Oracle's Blessing!", `Your Orpington Oracles granted you ${formatNumber(totalBonus)} eggs!`);
+                        }
+                        gameState.oracleTimer = 0; // Reset timer
+                    }
+                }
+
                 updateUI(gameState);
                 checkAchievements();
             } catch (error) {
@@ -1136,8 +1178,13 @@
                     const { nickname, unlockedAchievements, permanentBonus, resets } = gameState;
                     const eggsForPrestige = Math.floor(Math.sqrt(gameState.totalEggs / 1e11));
                     const prestigeBuff = gameState.activeBuffs.prestigeBuff ? gameState.activeBuffs.prestigeBuff.value : 0;
-                    
-                    let newRep = (gameState.reputation || 0) + Math.floor((eggsForPrestige > 0 ? eggsForPrestige : 1) * (1 + prestigeBuff));
+
+                    const reputationGained = Math.floor((eggsForPrestige > 0 ? eggsForPrestige : 1) * (1 + prestigeBuff));
+                    const wyandotteBonus = 1 + (gameState.chickens.wyandotte * 0.01); // Each Wyandotte adds 1% to prestige gain
+                    const finalGainedRep = Math.floor(reputationGained * wyandotteBonus);
+
+                    let newRep = (gameState.reputation || 0) + finalGainedRep;
+
                     if (!isFinite(newRep)) {
                         newRep = gameState.reputation || 0; // Fallback if calculation results in Infinity
                     }
