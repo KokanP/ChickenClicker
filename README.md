@@ -1,6 +1,6 @@
 # **Chicken Clicker**
 
-An incremental idle game about clicking chickens and managing a coop. This game is an evolution of the classic *Cow Clicker* concept, expanded with modern idle game mechanics.
+An incremental idle game about clicking chickens and managing a coop. This game is an evolution of the classic *Cow Clicker* concept, expanded with modern idle game mechanics like achievements, prestige, and now, **offline progress**.
 
 ## **Project Path & History**
 
@@ -31,6 +31,14 @@ Version 2.5 introduces the ability to export and import your save data. This is 
 * **Importing:** In the "Settings" menu, you can paste save data into the text box and click "From Text", or you can select a previously downloaded save file by clicking "From File". The game will reload to apply the new save state.
 
 ## **Changelog**
+
+### **Version 2.7 (Banty Shack)**
+
+*Named in honor of torn.com's faction Banty Shack for reaching 1 million respect.*
+
+* **Feature:** Implemented Offline Progress\! The game now calculates and awards resources (Eggs, Golden Feathers, Reputation) earned while the game was closed.  
+* **UI:** Added a "Welcome Back" modal that appears on load to summarize the earnings your farm made while you were away.  
+* **Housekeeping:** Updated the game's internal version number and save file key to 2.7.
 
 ### **Version 2.5 (Totoro)**
 

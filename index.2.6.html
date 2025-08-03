@@ -419,12 +419,6 @@
                     <details class="changelog-details text-sm text-gray-800 bg-white/50 p-2 rounded-lg">
                         <summary class="font-bold text-gray-800 cursor-pointer">Changelog</summary>
                         <div class="mt-2 space-y-2 text-xs">
-                            <h4>Version 2.7 (Banty Shack)</h4>
-                            <ul class="list-disc pl-5">
-                                <li><strong>Feature:</strong> Implemented Offline Progress! The game now calculates and awards resources earned while you were away.</li>
-                                <li><strong>UI:</strong> Added a "Welcome Back" modal to show offline gains.</li>
-                                <li><strong>Housekeeping:</strong> Updated version number and save key to 2.7.</li>
-                            </ul>
                             <h4>Version 2.6 (Tarzan)</h4>
                             <ul class="list-disc pl-5">
                                 <li><strong>Balance:</strong> Changed achievement bonuses from multiplicative to additive to prevent runaway late-game scaling.</li>
@@ -464,23 +458,7 @@
                     </details>
                 </div>
                 <div class="text-center text-gray-600">
-                    <p>Version: <span id="version-number">2.7 Doc</span></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- NEW: Offline Progress Modal -->
-    <div id="offline-progress-modal" class="modal-screen">
-        <div class="modal-content">
-            <button class="close-modal-btn">&times;</button>
-            <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">Welcome Back!</h2>
-            <div id="offline-recap" class="modal-body flex flex-col justify-center items-center space-y-4 text-center">
-                <p>While you were away for <strong id="offline-time">0 seconds</strong>, your farm produced:</p>
-                <div class="space-y-2 text-2xl funky-font">
-                    <p id="offline-eggs-line" class="text-blue-600 hidden">0 Eggs</p>
-                    <p id="offline-feathers-line" class="text-yellow-600 hidden">0 Golden Feathers</p>
-                    <p id="offline-rep-line" class="text-purple-600 hidden">0 Reputation</p>
+                    <p>Version: <span id="version-number">2.6 Tarzan</span></p>
                 </div>
             </div>
         </div>
@@ -517,8 +495,8 @@
 
         // --- config.js content ---
         const CONFIG = {
-            SAVE_KEY: 'chickenClickerSave_v2.7', // Updated save key for the new version
-            GAME_VERSION: '2.7 Doc', // Updated version number
+            SAVE_KEY: 'chickenClickerSave_v2.6', // Updated save key for the new version
+            GAME_VERSION: '2.6 Tarzan', // Updated version number
             GAME_TICK_INTERVAL: 0.1,
             SAVE_INTERVAL: 5,
             GOLDEN_CHICKEN_SPAWN_INTERVAL: 60,
@@ -1107,6 +1085,7 @@
                 const decodedString = atob(saveString);
                 const newGameState = JSON.parse(decodedString);
                 
+                // Basic validation
                 if (typeof newGameState.eggs !== 'number' || typeof newGameState.upgrades.worker !== 'number') {
                     throw new Error("Invalid save file structure.");
                 }
@@ -1119,65 +1098,6 @@
                 showToast("Error", "Invalid or corrupt save data.");
                 console.error("Import failed:", e);
             }
-        }
-
-        // --- NEW: Offline Progress Calculation ---
-        function calculateOfflineProgress() {
-            const lastTime = localStorage.getItem('chickenClickerExitTime');
-            if (!lastTime) return;
-
-            localStorage.removeItem('chickenClickerExitTime'); // Clean up immediately
-
-            let offlineSeconds = (Date.now() - parseInt(lastTime, 10)) / 1000;
-            if (offlineSeconds <= 10) return; // Don't award for brief periods
-
-            // Cap offline time to 24 hours to prevent exploitation
-            const maxOfflineSeconds = 86400; 
-            offlineSeconds = Math.min(offlineSeconds, maxOfflineSeconds);
-
-            // Calculate earnings
-            const offlineEps = getEggsPerSecond(gameState);
-            const eggsGained = Math.floor(offlineEps * offlineSeconds);
-            
-            const featherChancePerSecond = (gameState.chickens.silkie * (0.1 + (gameState.upgrades.featherForecast * 0.01)));
-            const feathersGained = Math.floor(featherChancePerSecond * offlineSeconds);
-
-            const repChancePerSecond = gameState.chickens.rooster * 0.01;
-            const repGained = repChancePerSecond * offlineSeconds;
-
-            if (eggsGained <= 0 && feathersGained <= 0 && repGained <= 0) return;
-
-            // Update game state
-            gameState.eggs += eggsGained;
-            gameState.totalEggs += eggsGained;
-            gameState.feathers += feathersGained;
-            // gameState.totalFeathers += feathersGained; // Decided against adding to total for now to avoid achievement exploits
-            gameState.reputation += repGained;
-
-            // Update and show the modal
-            const timeAwayHours = Math.floor(offlineSeconds / 3600);
-            const timeAwayMinutes = Math.floor((offlineSeconds % 3600) / 60);
-            document.getElementById('offline-time').textContent = `${timeAwayHours}h ${timeAwayMinutes}m`;
-            
-            const offlineEggsLine = document.getElementById('offline-eggs-line');
-            if (eggsGained > 0) {
-                offlineEggsLine.textContent = `+${formatNumber(eggsGained)} Eggs`;
-                offlineEggsLine.classList.remove('hidden');
-            }
-
-            const offlineFeathersLine = document.getElementById('offline-feathers-line');
-             if (feathersGained > 0) {
-                offlineFeathersLine.textContent = `+${formatNumber(feathersGained)} Golden Feathers`;
-                offlineFeathersLine.classList.remove('hidden');
-            }
-
-            const offlineRepLine = document.getElementById('offline-rep-line');
-             if (repGained > 0) {
-                offlineRepLine.textContent = `+${formatNumber(repGained)} Reputation`;
-                offlineRepLine.classList.remove('hidden');
-            }
-
-            document.getElementById('offline-progress-modal').style.display = 'flex';
         }
 
 
@@ -1215,12 +1135,13 @@
                     if(cheapest) gameState.upgrades[cheapest]++;
                 }
 
+                // Orpington Oracle Logic (10 minutes = 600 seconds)
                 if (gameState.chickens.orpington > 0) {
                     gameState.oracleTimer = (gameState.oracleTimer || 0) + secondsPassed;
                     if (gameState.oracleTimer >= 600) {
                         const oracles = gameState.chickens.orpington;
-                        const baseBonus = getEggsPerSecond(gameState) * 1800;
-                        const randomMultiplier = Math.random() + 0.5;
+                        const baseBonus = getEggsPerSecond(gameState) * 1800; // Bonus is 30 minutes of EPS
+                        const randomMultiplier = Math.random() + 0.5; // Adds randomness from 0.5x to 1.5x
                         const totalBonus = Math.floor(baseBonus * oracles * randomMultiplier);
 
                         if (totalBonus > 0) {
@@ -1228,7 +1149,7 @@
                             gameState.totalEggs += totalBonus;
                             showToast("Oracle's Blessing!", `Your Orpington Oracles granted you ${formatNumber(totalBonus)} eggs!`);
                         }
-                        gameState.oracleTimer = 0;
+                        gameState.oracleTimer = 0; // Reset timer
                     }
                 }
 
@@ -1236,6 +1157,7 @@
                 checkAchievements();
             } catch (error) {
                 console.error("Game loop crashed:", error);
+                // In a real scenario, you might want to stop the interval here
             }
         }
 
@@ -1258,13 +1180,13 @@
                     const prestigeBuff = gameState.activeBuffs.prestigeBuff ? gameState.activeBuffs.prestigeBuff.value : 0;
 
                     const reputationGained = Math.floor((eggsForPrestige > 0 ? eggsForPrestige : 1) * (1 + prestigeBuff));
-                    const wyandotteBonus = 1 + (gameState.chickens.wyandotte * 0.01);
+                    const wyandotteBonus = 1 + (gameState.chickens.wyandotte * 0.01); // Each Wyandotte adds 1% to prestige gain
                     const finalGainedRep = Math.floor(reputationGained * wyandotteBonus);
 
                     let newRep = (gameState.reputation || 0) + finalGainedRep;
 
                     if (!isFinite(newRep)) {
-                        newRep = gameState.reputation || 0;
+                        newRep = gameState.reputation || 0; // Fallback if calculation results in Infinity
                     }
 
                     const prestigeCount = (gameState.prestigeCount || 0) + 1;
@@ -1276,7 +1198,7 @@
                     newGameState.prestigeCount = prestigeCount;
                     newGameState.unlockedAchievements = unlockedHidden;
                     newGameState.permanentBonus = permanentBonus;
-                    newGameState.resets = resets;
+                    newGameState.resets = resets; // Carry over the reset counter
                     gameState = newGameState;
 
                     saveGame();
@@ -1325,15 +1247,6 @@
             elements.resetButton.addEventListener('click', hardReset);
             elements.licenseSummary.addEventListener('click', () => { gameState.licenseClicked = true; });
             
-            // --- NEW: Offline Progress Listeners ---
-            const saveExitTime = () => localStorage.setItem('chickenClickerExitTime', Date.now());
-            window.addEventListener('beforeunload', saveExitTime);
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) {
-                    saveExitTime();
-                }
-            });
-            
             // Save/Import Listeners
             elements.exportSaveClipboardBtn.addEventListener('click', () => exportSave(false));
             elements.exportSaveFileBtn.addEventListener('click', () => exportSave(true));
@@ -1364,10 +1277,6 @@
             buildUpgradeShop();
             buildCoop();
             loadGame();
-            
-            // --- NEW: Calculate offline progress after loading game ---
-            calculateOfflineProgress();
-
             renderAchievements(gameState);
             updateUI(gameState);
             setupEventListeners();
