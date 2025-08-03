@@ -40,6 +40,14 @@ Version 2.5 introduces the ability to export and import your save data. This is 
 * **UI:** Added a "Welcome Back" modal that appears on load to summarize the earnings your farm made while you were away.  
 * **Housekeeping:** Updated the game's internal version number and save file key to 2.7.
 
+### **Version 2.6 (Tarzan)**
+
+* **Balance:** Changed achievement bonuses from multiplicative to additive to prevent runaway late-game scaling.  
+* **UI:** The prestige menu now displays a full breakdown of all permanent production multipliers for better clarity.  
+* **Feature:** Implemented the previously non-functional "Orpington Oracle" chicken. It now provides a random egg bonus every 10 minutes.  
+* **Fix:** The "Wyandotte Warrior" now correctly increases Reputation gained on prestige, as described.  
+* **Housekeeping:** Updated version number and save key to 2.6.
+
 ### **Version 2.5 (Totoro)**
 
 *Named in honor of user Totoro\_Sama for discovering and reporting a critical, game-breaking bug.*
