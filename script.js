@@ -443,25 +443,26 @@ function clickChicken(event) {
     showFloatingText(`+${formatNumber(epc)}`, event);
     
     // Check for Fowl Language upgrade and occasionally show an insult
-    if (gameState.upgrades.fowlLanguage > 0 && Math.random() < 0.8333) { // ~0.0083% chance, avg 1 per 2 mins @ 100cps
+    if (gameState.upgrades.fowlLanguage > 0 && Math.random() < 0.00008333) { 
         const insult = FOWL_INSULTS[Math.floor(Math.random() * FOWL_INSULTS.length)];
         const el = document.createElement('div');
         el.className = 'floating-insult'; // Use the new CSS class
         el.textContent = insult;
 
-        const chickenContainer = document.querySelector('.chicken-container');
-        if (chickenContainer) {
-            chickenContainer.appendChild(el);
-            const containerRect = chickenContainer.getBoundingClientRect();
-            el.style.left = `${event.clientX - containerRect.left - (el.offsetWidth / 2)}px`;
-            el.style.top = `${event.clientY - containerRect.top - (el.offsetHeight / 2)}px`;
-
-            setTimeout(() => {
-                if (el.parentElement) {
-                    el.parentElement.removeChild(el);
-                }
-            }, 1450);
-        }
+		const chickenContainer = document.querySelector('.chicken-container');
+		if (chickenContainer) {
+			chickenContainer.appendChild(el);
+			const containerRect = chickenContainer.getBoundingClientRect();
+			// Center horizontally
+			el.style.left = `${(containerRect.width / 2) - (el.offsetWidth / 2)}px`;
+			// Place above the chicken's head; adjust -40 or -50 as needed for visual fit
+			el.style.top = `10px`;
+			setTimeout(() => {
+				if (el.parentElement) {
+					el.parentElement.removeChild(el);
+				}
+			}, 1450);
+		}
         gameState.firstInsultFired = true;
     }
 

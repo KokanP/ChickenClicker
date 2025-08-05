@@ -31,13 +31,21 @@ body {
     text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
 }
 .floating-insult {
-    position: absolute;
-    font-family: 'Luckiest Guy', cursive;
-    font-size: 1.8rem; /* Slightly smaller than click text */
-    color: #ef4444; /* A nice red color */
-    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
-    pointer-events: none;
-    animation: floatUp 1.5s ease-out forwards;
+  position: absolute;
+  z-index: 1000;
+  color: #b91c1c;
+  font-size: 2rem;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  pointer-events: none;
+  left: 50%; /* fallback, will be overwritten by JS */
+  top: 10px;
+  transform: translateX(-50%);
+  animation: floatUp 1.2s ease-out forwards;
+  white-space: nowrap;
+}
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-80px);}
 }
 .chicken-container {
     position: relative;
