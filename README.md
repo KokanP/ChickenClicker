@@ -14,12 +14,13 @@ The easiest way to play is to visit the official project URL:
 
 [**https://chickenclicker.iffy.top/**](https://chickenclicker.iffy.top/)
 
-### **Running Locally**
+### Running Locally
 
 If you wish to run the game from the source files:
 
-1. Clone this repository or download the project.  
-2. Open the index.html file in any modern web browser.
+1.  Clone this repository or download the project as a ZIP file.
+2.  Ensure all three core files (`index.html`, `style.css`, and `script.js`) are in the same directory.
+3.  Open the `index.html` file in any modern web browser.
 
 *(The multi-file version is still available in the project history for reference.)*
 
@@ -31,6 +32,21 @@ Version 2.5 introduces the ability to export and import your save data. This is 
 * **Importing:** In the "Settings" menu, you can paste save data into the text box and click "From Text", or you can select a previously downloaded save file by clicking "From File". The game will reload to apply the new save state.
 
 ## **Changelog**
+
+### **Version 2.9 (Cluck You Totoro!)**
+
+* **Fix:** The "Fowl Language" upgrade now works as intended. The chicken will occasionally squawk insults at the player after the upgrade is purchased, finally giving this essential feature its voice.
+* **Documentation:** Updated the in-game "How to Play" guide with accurate descriptions for Prestige cost, Golden Feathers, and the Golden Chicken's rewards to match current game mechanics.
+* **Documentation:** Updated the "Running Locally" instructions in the README to correctly reflect the project's multi-file structure.
+* **Housekeeping:** Updated version number and save key to 2.9.
+
+### **Version 2.8 (Architect's Update)**
+
+* **Balance:** The prestige cost is now dynamic, doubling with each use to increase the late-game challenge.
+* **Feature:** Added four new upgrades: Golden Compass, Comfy Coop Bedding, Prismatic Feed, and the 'Ancestral Blueprints' prestige upgrade.
+* **Fix:** Corrected a visual bug where long version titles would overflow on narrow mobile screens.
+* **Housekeeping:** Updated version number and save key to 2.8.
+* **Housekeeping:** Refactored the single index.html file into separate index.html, style.css, and script.js files for better organization and maintainability.
 
 ### **Version 2.7 (Banty Shack)**
 

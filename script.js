@@ -1,9 +1,8 @@
 // --- Single-File Merged JavaScript for Chicken Clicker ---
 
-// --- config.js content ---
 const CONFIG = {
-    SAVE_KEY: 'chickenClickerSave_v2.8',
-    GAME_VERSION: '2.8 Architect\'s Update',
+    SAVE_KEY: 'chickenClickerSave_v2.9',
+    GAME_VERSION: '2.8 Cluck You Totoro!',
     GAME_TICK_INTERVAL: 0.1,
     SAVE_INTERVAL: 5,
     GOLDEN_CHICKEN_SPAWN_INTERVAL: 60,
@@ -49,6 +48,15 @@ const CONFIG = {
         gold:   { likelihood: 1,  effect: 'permanentBonus', value: 0.01, duration: -1, color: 'gold' }
     }
 };
+const FOWL_INSULTS = [
+    "Peck off!",
+    "Cluck you!",
+    "Is that all you've got?",
+    "My grandmother clicks harder.",
+    "You call that a click?",
+    "Bawk-bawk-BUM!",
+    "Don't ruffle my feathers.",
+];
 const achievements = {
     click1: { name: "First Peck", description: "Click the chicken once.", bonus: 1.01 },
     click1k: { name: "Click Addict", description: "Click 1,000 times.", bonus: 1.02 },
@@ -105,6 +113,7 @@ const achievements = {
     allUpgrades: { name: "Master Builder", description: "Buy at least one of every upgrade.", bonus: 1.2, hidden: true },
     allChickens: { name: "Gotta Cluck 'Em All", description: "Own at least one of every chicken.", bonus: 1.2, hidden: true },
     eggCollector: { name: "Taste the Rainbow", description: "Find one of every colored egg.", bonus: 1.25, hidden: true },
+    firstInsult: { name: "Ruffled Feathers", description: "Witness the chicken's dark side for the first time.", bonus: 1.01, hidden: true },
 };
 const achievementConditions = {
     click1: (gs) => gs.totalClicks >= 1, click1k: (gs) => gs.totalClicks >= 1000, click100k: (gs) => gs.totalClicks >= 100000, click1M: (gs) => gs.totalClicks >= 1e6,
@@ -134,6 +143,7 @@ const achievementConditions = {
     allUpgrades: (gs) => Object.keys(CONFIG.UPGRADES).every(u => gs.upgrades[u] > 0),
     allChickens: (gs) => Object.keys(CONFIG.CHICKENS).every(c => gs.chickens[c] > 0),
     eggCollector: (gs) => Object.keys(CONFIG.COLORED_EGGS).every(c => gs.clickedColoredEggs[c]),
+    firstInsult: (gs) => gs.firstInsultFired,
 };
 
 // --- utils.js content ---
@@ -419,6 +429,7 @@ const initialGameState = {
     activeBuffs: {}, permanentBonus: 1, clickedColoredEggs: {},
     oracleTimer: 0,
     lastSuperClickTime: 0, superClickChain: 0, modalOpens: 0, timeSinceLastClick: 0,
+    firstInsultFired: false,
     prestigeUpgrades: { ancestralBlueprints: 0 },
 };
 
@@ -430,6 +441,29 @@ function clickChicken(event) {
     gameState.eggs += epc;
     gameState.totalEggs += epc;
     showFloatingText(`+${formatNumber(epc)}`, event);
+    
+    // Check for Fowl Language upgrade and occasionally show an insult
+    if (gameState.upgrades.fowlLanguage > 0 && Math.random() < 0.00008333) { // ~0.0083% chance, avg 1 per 2 mins @ 100cps
+        const insult = FOWL_INSULTS[Math.floor(Math.random() * FOWL_INSULTS.length)];
+        const el = document.createElement('div');
+        el.className = 'floating-insult'; // Use the new CSS class
+        el.textContent = insult;
+
+        const chickenContainer = document.querySelector('.chicken-container');
+        if (chickenContainer) {
+            chickenContainer.appendChild(el);
+            const containerRect = chickenContainer.getBoundingClientRect();
+            el.style.left = `${event.clientX - containerRect.left - (el.offsetWidth / 2)}px`;
+            el.style.top = `${event.clientY - containerRect.top - (el.offsetHeight / 2)}px`;
+
+            setTimeout(() => {
+                if (el.parentElement) {
+                    el.parentElement.removeChild(el);
+                }
+            }, 1450);
+        }
+        gameState.firstInsultFired = true;
+    }
 
     const superClickChance = (gameState.chickens.doja * 0.001) * (gameState.activeBuffs.superClickFrenzy ? gameState.activeBuffs.superClickFrenzy.value : 1);
     if (gameState.chickens.doja > 0 && Math.random() < superClickChance) {

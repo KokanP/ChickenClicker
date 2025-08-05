@@ -141,24 +141,24 @@
         <div class="modal-content">
             <button class="close-modal-btn">&times;</button>
             <h2 class="funky-font text-4xl text-center text-white mb-4" style="text-shadow: 3px 3px 0px var(--saddle-brown);">How to Play</h2>
-            <div class="modal-body">
-                <h3>Core Currencies & Stats</h3>
-                <p><strong>Eggs:</strong> The primary currency of the game. Earned by clicking the chicken and through automatic production (EPS). Used to buy most upgrades and chickens.</p>
-                <p><strong>Golden Feathers:</strong> A premium currency used to purchase powerful, specific upgrades like the "Golden Loom". Primarily earned by owning Silkie Chickens.</p>
-                <p><strong>Reputation:</strong> The prestige currency. Earned by "Selling the Coop" (prestiging). Each point provides a permanent production bonus to both your automatic and manual egg generation.</p>
-                <p><strong>EPS (Eggs Per Second):</strong> The total number of eggs you generate automatically every second from your chickens and upgrades. This is the main driver of progress in the mid-to-late game.</p>
-                <p><strong>EPC (Eggs Per Click):</strong> The total number of eggs you receive for each manual click on the chicken. This is your primary source of income at the start of the game.</p>
-                
-                <h3>Key Concepts & Mechanics</h3>
-                <p><strong>Upgrades:</strong> Permanent improvements that boost your production or unlock new game mechanics. They are purchased from the "Upgrades" screen.</p>
-                <p><strong>The Coop:</strong> The screen where you can purchase different types of specialized chickens. Each chicken provides a unique bonus, such as increasing EPS, finding Golden Feathers, or generating Reputation.</p>
-                <p><strong>Prestige ("Sell the Coop"):</strong> A core mechanic in idle games. When you reach a certain threshold (1 Trillion eggs), you can choose to reset your current progress (eggs, upgrades, chickens) in exchange for <strong>Reputation</strong> points. This makes the next playthrough faster due to the permanent bonus Reputation provides.</p>
-                <p><strong>Golden Chicken:</strong> A special chicken that randomly appears on the screen. Clicking it before it disappears awards a large, instant bonus of Eggs, typically equal to a significant portion of your income.</p>
-                <p><strong>Colored Eggs:</strong> Rare, colored eggs that spawn randomly on the screen. Clicking one grants a powerful but temporary boost (a "buff"), such as making clicks stronger, discounting upgrades, or increasing the chance of finding Golden Feathers.</p>
-                <p><strong>Achievements:</strong> Milestones unlocked by reaching specific goals (e.g., total eggs earned, number of clicks, owning certain items). Each unlocked achievement provides a small, permanent, and multiplicative bonus to all egg production.</p>
-                <p><strong>Buff:</strong> A temporary positive effect on your game, usually granted by clicking a Colored Egg.</p>
-                <p><strong>Hard Reset:</strong> An option in the settings menu to completely and permanently erase all your save data and start the game over from the very beginning.</p>
-            </div>
+			<div class="modal-body">
+				<h3>Core Currencies & Stats</h3>
+				<p><strong>Eggs:</strong> The primary currency of the game. Earned by clicking the chicken and through automatic production (EPS). Used to buy most upgrades and chickens.</p>
+				<p><strong>Golden Feathers:</strong> A premium currency used to purchase powerful, specific upgrades. Primarily earned by owning Silkie Chickens, with the discovery chance boosted by the "Feather Forecast" upgrade.</p>
+				<p><strong>Reputation:</strong> The prestige currency. Earned by "Selling the Coop" (prestiging). Each point provides a permanent production bonus to both your automatic and manual egg generation.</p>
+				<p><strong>EPS (Eggs Per Second):</strong> The total number of eggs you generate automatically every second from your chickens and upgrades. This is the main driver of progress in the mid-to-late game.</p>
+				<p><strong>EPC (Eggs Per Click):</strong> The total number of eggs you receive for each manual click on the chicken. This is your primary source of income at the start of the game.</p>
+				
+				<h3>Key Concepts & Mechanics</h3>
+				<p><strong>Upgrades:</strong> Permanent improvements that boost your production or unlock new game mechanics. They are purchased from the "Upgrades" screen.</p>
+				<p><strong>The Coop:</strong> The screen where you can purchase different types of specialized chickens. Each chicken provides a unique bonus, such as increasing EPS, finding Golden Feathers, or generating Reputation.</p>
+				<p><strong>Prestige ("Sell the Coop"):</strong> A core mechanic in idle games. When you can afford the cost, you can reset your progress (eggs, upgrades, chickens) for Reputation points. The cost starts at 1 Trillion eggs and doubles with each prestige.</p>
+				<p><strong>Golden Chicken:</strong> A special chicken that randomly appears on the screen. Clicking it awards a large egg bonus equal to 100 times your click power or 10 minutes of your EPS (whichever is greater), further boosted by the "Golden Compass" upgrade.</p>
+				<p><strong>Colored Eggs:</strong> Rare, colored eggs that spawn randomly on the screen. Clicking one grants a powerful but temporary boost (a "buff"), such as making clicks stronger, discounting upgrades, or increasing the chance of finding Golden Feathers.</p>
+				<p><strong>Achievements:</strong> Milestones unlocked by reaching specific goals. Each unlocked achievement provides a small, permanent, and additive bonus to all egg production.</p>
+				<p><strong>Buff:</strong> A temporary positive effect on your game, usually granted by clicking a Colored Egg.</p>
+				<p><strong>Hard Reset:</strong> An option in the settings menu to completely and permanently erase all your save data and start the game over from the very beginning.</p>
+			</div>
         </div>
     </div>
     
@@ -195,6 +195,13 @@
                     <details class="changelog-details text-sm text-gray-800 bg-white/50 p-2 rounded-lg">
                         <summary class="font-bold text-gray-800 cursor-pointer">Changelog</summary>
                         <div class="mt-2 space-y-2 text-xs">
+						    <h4>Version 2.9 (Cluck You Totoro!)</h4>
+                            <ul class="list-disc pl-5">
+								<li><strong>Fix:</strong> The "Fowl Language" upgrade now works as intended. The chicken will occasionally squawk insults at the player after the upgrade is purchased, finally giving this essential feature its voice.</li>
+								<li><strong>Documentation:</strong> Updated the in-game "How to Play" guide with accurate descriptions for Prestige cost, Golden Feathers, and the Golden Chicken's rewards.</li>
+								<li><strong>Documentation:</strong> Updated the README file with correct instructions for running the game locally.</li>
+                                <li><strong>Housekeeping:</strong> Updated version number and save key to 2.9.</li>
+                            </ul>
                             <h4>Version 2.8 (Architect's Update)</h4>
                             <ul class="list-disc pl-5">
 								<li><strong>Balance:</strong> The prestige cost is now dynamic, doubling with each use to increase the late-game challenge.</li>

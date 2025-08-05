@@ -30,6 +30,15 @@ body {
     letter-spacing: 2px;
     text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
 }
+.floating-insult {
+    position: absolute;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 1.8rem; /* Slightly smaller than click text */
+    color: #ef4444; /* A nice red color */
+    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+    pointer-events: none;
+    animation: floatUp 1.5s ease-out forwards;
+}
 .chicken-container {
     position: relative;
     display: flex;
