@@ -266,3 +266,32 @@ body {
     border-radius: 9999px;
     transition: width 0.3s ease-in-out;
 }
+
+.egg-effects-banner {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin: 8px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: opacity 0.3s;
+  flex-wrap: wrap;
+}
+
+.egg-effect-pill {
+  display: flex;
+  align-items: center;
+  border-radius: 999px;
+  background: #f1f5f9;
+  padding: 0.3em 0.8em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin: 0 3px;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.egg-effect-pill .icon {
+  margin-right: 0.5em;
+  font-size: 1.2em;
+}
