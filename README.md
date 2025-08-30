@@ -33,11 +33,15 @@ Version 2.5 introduces the ability to export and import your save data. This is 
 
 ## **Changelog**
 
+### **Version 2.92 (Eggies)**
+*   **Feature (UI):** Added a new banner to display all active colored egg buffs, showing their name and remaining duration.
+*   **Housekeeping:** Updated version number to 2.92.
+
 ### **Version 2.91 (Jules)**
 *   **Critical Fix (Reputation):** Fixed a major bug where Reputation gain would stall. The calculation for prestige has been corrected to properly include contributions from Roosters and the Wyandotte Warrior's bonus (which has also been increased).
 *   **Critical Fix (Buffs):** Fixed a bug that caused the Red Egg's "clickFrenzy" buff and other temporary buffs to not apply correctly or expire. The entire buff-handling system is now more robust.
 *   **Feature (UI):** Added progress bars and percentage text to achievements in the achievements panel, allowing players to see how close they are to unlocking them.
-*   **Housekeeping:** Updated version number and save key to 2.91.
+*   **Housekeeping:** Updated version number to 2.91.
 
 ### **Version 2.9 (Cluck You Totoro!)**
 

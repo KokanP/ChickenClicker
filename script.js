@@ -1,8 +1,8 @@
 // --- Single-File Merged JavaScript for Chicken Clicker ---
 
 const CONFIG = {
-    SAVE_KEY: 'chickenClickerSave_v2.91',
-    GAME_VERSION: '2.91 Jules',
+    SAVE_KEY: 'chickenClickerSave_v2.9',
+    GAME_VERSION: '2.92 (Eggies)',
     GAME_TICK_INTERVAL: 0.1,
     SAVE_INTERVAL: 5,
     GOLDEN_CHICKEN_SPAWN_INTERVAL: 60,
@@ -362,7 +362,38 @@ function updateUI(gameState) {
         blueprintsCostEl.textContent = formatNumber(cost);
         buyBlueprintsBtn.disabled = gameState.reputation < cost;
     }
+
+    updateEggEffectsBanner(gameState);
 }
+
+function updateEggEffectsBanner(gameState) {
+  const banner = document.getElementById('egg-effects-banner');
+  banner.innerHTML = '';
+  // Only consider buffs with duration > 0 (active timed buffs)
+  const activeBuffs = Object.entries(gameState.activeBuffs)
+    .filter(([effect, buff]) => buff.duration > 0);
+
+  if (activeBuffs.length === 0) {
+    banner.style.display = 'none';
+    return;
+  }
+
+  banner.style.display = 'flex';
+  activeBuffs.forEach(([effect, buff]) => {
+    // Find the egg config to get color and icon
+    const eggEntry = Object.entries(CONFIG.COLORED_EGGS).find(([k, egg]) => egg.effect === effect);
+    const color = eggEntry ? eggEntry[1].color : '#e2e8f0';
+    const name = effect.charAt(0).toUpperCase() + effect.slice(1).replace(/([A-Z])/g, ' $1');
+
+    const pill = document.createElement('span');
+    pill.className = 'egg-effect-pill';
+    pill.style.background = color + "22"; // transparent background
+    pill.style.border = `2px solid ${color}`;
+    pill.innerHTML = `<span class="icon" style="color:${color}">🥚</span> ${name}: ${Math.ceil(buff.duration)}s`;
+    banner.appendChild(pill);
+  });
+}
+
 function renderAchievements(gameState) {
     elements.achievementsList.innerHTML = '';
     Object.keys(achievements).forEach(id => {
