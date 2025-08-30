@@ -1,8 +1,8 @@
 // --- Single-File Merged JavaScript for Chicken Clicker ---
 
 const CONFIG = {
-    SAVE_KEY: 'chickenClickerSave_v2.9',
-    GAME_VERSION: '2.8 Cluck You Totoro!',
+    SAVE_KEY: 'chickenClickerSave_v2.91',
+    GAME_VERSION: '2.91 Jules',
     GAME_TICK_INTERVAL: 0.1,
     SAVE_INTERVAL: 5,
     GOLDEN_CHICKEN_SPAWN_INTERVAL: 60,
@@ -27,7 +27,7 @@ const CONFIG = {
     CHICKENS: {
         leghorn: { name: 'Leghorn Chicken', desc: 'The backbone of your coop. Produces 1 egg/s per Coop Worker.', baseCost: 1000, exponent: 1.25, color: 'gray' },
         silkie: { name: 'Silkie Chicken', desc: 'Produces fewer eggs but has a chance to find Golden Feathers.', baseCost: 5000, exponent: 1.25, color: 'orange' },
-        rooster: { name: 'Rooster', desc: 'Doesn\'t lay eggs. Generates Reputation instead.', baseCost: 1e6, exponent: 1.25, color: 'red' },
+        rooster: { name: 'Rooster', desc: 'Doesn\'t lay eggs. Generates Reputation instead. Each rooster contributes to your total Reputation gained on prestige.', baseCost: 1e6, exponent: 1.25, color: 'red', repValue: 1000 },
         orpington: { name: 'Orpington Oracle', desc: 'Grants a random egg bonus every 10 minutes.', baseCost: 1e8, exponent: 1.3, color: 'yellow' },
         wyandotte: { name: 'Wyandotte Warrior', desc: 'Increases Reputation gained on prestige.', baseCost: 1e10, exponent: 1.35, color: 'blue' },
         doja: { name: 'Doja Cow', desc: '"Moooove over!" Each click has a chance to be a "Super Click", granting 1 hour of EPS.', baseCost: 5e12, exponent: 1.4, color: 'pink' },
@@ -188,7 +188,13 @@ const getAchievementBonus = (gs) => {
 };
 const getReputationBonus = (gs) => 1 + (gs.reputation || 0) * 0.05;
 const getEventModifier = (gs) => gs.event.active ? gs.event.modifier : 1;
-const getBuffModifier = (gs, buffType, defaultValue = 1) => (gs.activeBuffs[buffType] ? gs.activeBuffs[buffType].value : defaultValue);
+const getBuffModifier = (gs, buffType, defaultValue = 1) => {
+    const buff = gs.activeBuffs[buffType];
+    if (buff && buff.duration > 0) {
+        return buff.value;
+    }
+    return defaultValue;
+};
 const getBoostMultiplier = (gs) => getBuffModifier(gs, 'boostMultiplier');
 const getBaseEggsPerSecond = (gs) => {
     let baseEps = gs.upgrades.worker * gs.chickens.leghorn * 1;
@@ -362,24 +368,62 @@ function renderAchievements(gameState) {
     Object.keys(achievements).forEach(id => {
         const ach = achievements[id];
         const isUnlocked = gameState.unlockedAchievements.includes(id);
-        if(ach.hidden && !isUnlocked) return;
+        if (ach.hidden && !isUnlocked) return;
 
         const el = document.createElement('div');
-        el.className = `p-2 rounded-lg transition-all duration-300 font-semibold flex justify-between items-center ${isUnlocked ? 'bg-yellow-300 text-yellow-800' : 'bg-gray-200 text-gray-500'}`;
-        el.innerHTML = `<div><strong>${ach.name}</strong><p class="text-sm font-normal">${ach.description}</p></div>`;
-        
-        if (isUnlocked) {
-            const shareIcon = document.createElement('span');
-            shareIcon.innerHTML = `<svg class="w-6 h-6 cursor-pointer hover:scale-110 transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-3V6c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-8c0-1.1-.9-2-2-2zM9 6h6v2H9V6zm11 12H4v-8h16v8zm-9-4h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>`;
-            shareIcon.title = "Share Achievement";
-            shareIcon.addEventListener('click', (e) => {
-                e.stopPropagation();
-                generateAchievementScreenshot(id, gameState);
-            });
-            el.appendChild(shareIcon);
+        el.className = `p-2 rounded-lg transition-all duration-300 font-semibold ${isUnlocked ? 'bg-yellow-300 text-yellow-800' : 'bg-gray-200 text-gray-500'}`;
+
+        let progressHtml = '';
+        if (!isUnlocked) {
+            const condition = achievementConditions[id];
+            const conditionStr = condition.toString();
+            const match = conditionStr.match(/gs\.(totalClicks|totalEggs|upgrades\.(\w+)|chickens\.(\w+)|goldenChickensClicked)\s*>=\s*([\d.e+]+)/);
+            if (match) {
+                const key = match[1];
+                const target = parseFloat(match[4]);
+                let current = 0;
+                if (key.startsWith('upgrades.')) {
+                    current = gameState.upgrades[match[2]] || 0;
+                } else if (key.startsWith('chickens.')) {
+                    current = gameState.chickens[match[3]] || 0;
+                } else {
+                    current = gameState[key] || 0;
+                }
+                const progress = Math.min(current / target, 1);
+                if (progress > 0) {
+                    progressHtml = `
+                        <div class="achievement-progress-bar">
+                            <div class="achievement-progress" style="width: ${progress * 100}%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600 text-right mt-1">${formatNumber(current)} / ${formatNumber(target)}</p>
+                    `;
+                }
+            }
         }
-        
+
+        el.innerHTML = `
+            <div class="flex justify-between items-center">
+                <div>
+                    <strong>${ach.name}</strong>
+                    <p class="text-sm font-normal">${ach.description}</p>
+                </div>
+                ${isUnlocked ? `<span id="share-${id}" class="cursor-pointer hover:scale-110 transition-transform"><svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-3V6c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-8c0-1.1-.9-2-2-2zM9 6h6v2H9V6zm11 12H4v-8h16v8zm-9-4h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg></span>` : ''}
+            </div>
+            ${progressHtml}
+        `;
+
         elements.achievementsList.appendChild(el);
+
+        if (isUnlocked) {
+            const shareIcon = el.querySelector(`#share-${id}`);
+            if (shareIcon) {
+                shareIcon.title = "Share Achievement";
+                shareIcon.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    generateAchievementScreenshot(id, gameState);
+                });
+            }
+        }
     });
 }
 function showToast(title, description) {
@@ -738,10 +782,15 @@ function gameLoop() {
         gameState.totalEggs += eps * secondsPassed;
         gameState.timePlayed += secondsPassed;
         gameState.timeSinceLastClick = (gameState.timeSinceLastClick || 0) + secondsPassed;
-        for (const buff in gameState.activeBuffs) {
-            if (gameState.activeBuffs[buff].duration > 0) {
-                gameState.activeBuffs[buff].duration -= secondsPassed;
-                if (gameState.activeBuffs[buff].duration <= 0) delete gameState.activeBuffs[buff];
+        const activeBuffKeys = Object.keys(gameState.activeBuffs);
+        for (const buffKey of activeBuffKeys) {
+            const buff = gameState.activeBuffs[buffKey];
+            // Ensure buff exists and has a positive, numeric duration before acting on it.
+            if (buff && typeof buff.duration === 'number' && buff.duration > 0) {
+                buff.duration -= secondsPassed;
+                if (buff.duration <= 0) {
+                    delete gameState.activeBuffs[buffKey];
+                }
             }
         }
         if(gameState.event.active) {
@@ -807,9 +856,12 @@ function prestige() {
             const eggsForPrestige = Math.floor(Math.sqrt(gameState.totalEggs / 1e11));
             const prestigeBuff = gameState.activeBuffs.prestigeBuff ? gameState.activeBuffs.prestigeBuff.value : 0;
 
-            const reputationGained = Math.floor((eggsForPrestige > 0 ? eggsForPrestige : 1) * (1 + prestigeBuff));
-            const wyandotteBonus = 1 + (gameState.chickens.wyandotte * 0.01);
-            const finalGainedRep = Math.floor(reputationGained * wyandotteBonus);
+            const reputationFromEggs = Math.floor((eggsForPrestige > 0 ? eggsForPrestige : 1) * (1 + prestigeBuff));
+            const reputationFromRoosters = (gameState.chickens.rooster || 0) * (CONFIG.CHICKENS.rooster.repValue || 0);
+            const totalReputationGained = reputationFromEggs + reputationFromRoosters;
+
+            const wyandotteBonus = 1 + (gameState.chickens.wyandotte * 0.05);
+            const finalGainedRep = Math.floor(totalReputationGained * wyandotteBonus);
 
             let newRep = (gameState.reputation || 0) + finalGainedRep;
 
