@@ -250,3 +250,19 @@ body {
 #help-screen .modal-body strong {
     color: var(--saddle-brown);
 }
+
+.achievement-progress-bar {
+    background-color: #e5e7eb; /* gray-200 */
+    border-radius: 9999px;
+    height: 0.75rem;
+    margin-top: 0.5rem;
+    overflow: hidden;
+    border: 1px solid #d1d5db; /* gray-300 */
+}
+
+.achievement-progress {
+    background-color: #22c55e; /* green-500 */
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.3s ease-in-out;
+}
