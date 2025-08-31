@@ -2,7 +2,7 @@
 
 const CONFIG = {
     SAVE_KEY: 'chickenClickerSave_v2.9',
-    GAME_VERSION: '2.92 (Eggies)',
+    GAME_VERSION: '2.93 (Clarity Update)',
     GAME_TICK_INTERVAL: 0.1,
     SAVE_INTERVAL: 5,
     GOLDEN_CHICKEN_SPAWN_INTERVAL: 60,
@@ -11,9 +11,9 @@ const CONFIG = {
     COLORED_EGG_SPAWN_CHANCE: 10 / 240,
     PRESTIGE_COST: 1e12,
     UPGRADES: {
-        worker: { name: 'Coop Worker', desc: 'Helps Leghorns produce eggs automatically.', baseCost: 10, exponent: 1.15, currency: 'eggs', color: 'green' },
-        incubator: { name: 'Incubator', desc: 'Increases eggs per click.', baseCost: 50, exponent: 1.15, currency: 'eggs', color: 'blue' },
-        loom: { name: 'Golden Loom', desc: 'Uses Golden Feathers to massively boost eggs per click.', baseCost: 10, exponent: 1.5, currency: 'feathers', color: 'yellow' },
+        worker: { name: 'Coop Worker', desc: 'Each level helps Leghorn Chickens produce +1 EPS.', baseCost: 10, exponent: 1.15, currency: 'eggs', color: 'green' },
+        incubator: { name: 'Incubator', desc: 'Each level increases your base Eggs Per Click by +1.', baseCost: 50, exponent: 1.15, currency: 'eggs', color: 'blue' },
+        loom: { name: 'Golden Loom', desc: 'Uses Golden Feathers to boost eggs per click by +25% per level.', baseCost: 10, exponent: 1.5, currency: 'feathers', color: 'yellow' },
         featherForecast: { name: 'Feather Forecast', desc: 'Increases Golden Feather find chance.', baseCost: 10000, exponent: 1.8, currency: 'eggs', color: 'gray' },
         eggstraClicks: { name: 'Eggstra Clicks', desc: 'Each click has a chance to be 10x stronger.', baseCost: 50000, exponent: 1.25, currency: 'eggs', color: 'pink' },
         cluckworkAutomation: { name: 'Cluckwork Automation', desc: 'Boosts EPS by 5% for every building owned.', baseCost: 1e6, exponent: 2, currency: 'eggs', color: 'purple' },
@@ -27,10 +27,10 @@ const CONFIG = {
     CHICKENS: {
         leghorn: { name: 'Leghorn Chicken', desc: 'The backbone of your coop. Produces 1 egg/s per Coop Worker.', baseCost: 1000, exponent: 1.25, color: 'gray' },
         silkie: { name: 'Silkie Chicken', desc: 'Produces fewer eggs but has a chance to find Golden Feathers.', baseCost: 5000, exponent: 1.25, color: 'orange' },
-        rooster: { name: 'Rooster', desc: 'Doesn\'t lay eggs. Generates Reputation instead. Each rooster contributes to your total Reputation gained on prestige.', baseCost: 1e6, exponent: 1.25, color: 'red', repValue: 1000 },
+        rooster: { name: 'Rooster', desc: 'Doesn\'t lay eggs. Grants a base of 1,000 Reputation on prestige instead.', baseCost: 1e6, exponent: 1.25, color: 'red', repValue: 1000 },
         orpington: { name: 'Orpington Oracle', desc: 'Grants a random egg bonus every 10 minutes.', baseCost: 1e8, exponent: 1.3, color: 'yellow' },
-        wyandotte: { name: 'Wyandotte Warrior', desc: 'Increases Reputation gained on prestige.', baseCost: 1e10, exponent: 1.35, color: 'blue' },
-        doja: { name: 'Doja Cow', desc: '"Moooove over!" Each click has a chance to be a "Super Click", granting 1 hour of EPS.', baseCost: 5e12, exponent: 1.4, color: 'pink' },
+        wyandotte: { name: 'Wyandotte Warrior', desc: 'Increases Reputation gained on prestige by 5% per chicken.', baseCost: 1e10, exponent: 1.35, color: 'blue' },
+        doja: { name: 'Doja Cow', desc: '"Moooove over!" Each click has a chance to be a "Super Click", granting 1 hour of EPS. Landing Super Clicks within 10 seconds of each other creates a chain, increasing the bonus by 10% each time!', baseCost: 5e12, exponent: 1.4, color: 'pink' },
         brahma: { name: 'Brahma Behemoth', desc: 'A gentle giant. Adds a massive +500% to your base EPS.', baseCost: 1e15, exponent: 1.45, color: 'green' },
         serama: { name: 'Serama Sorcerer', desc: 'Has a chance to grant a free upgrade level.', baseCost: 1e18, exponent: 1.5, color: 'purple' },
         banty: { name: 'Banty Chicken', desc: 'The king. Provides a +10% multiplicative bonus to ALL production.', baseCost: 1e21, exponent: 1.6, color: 'indigo' }
