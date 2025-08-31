@@ -2,7 +2,7 @@
 
 const CONFIG = {
     SAVE_KEY: 'chickenClickerSave_v2.9',
-    GAME_VERSION: '2.93 (Clarity Update)',
+    GAME_VERSION: '2.94 (Diorama Prep)',
     GAME_TICK_INTERVAL: 0.1,
     SAVE_INTERVAL: 5,
     GOLDEN_CHICKEN_SPAWN_INTERVAL: 60,
@@ -364,6 +364,36 @@ function updateUI(gameState) {
     }
 
     updateEggEffectsBanner(gameState);
+    updateDioramaState(gameState);
+}
+function updateDioramaState(gameState) {
+    const container = document.getElementById('diorama-state-container');
+    if (!container) return;
+
+    let html = '<h4 class="funky-font text-center mb-2">Diorama State</h4>';
+
+    html += '<strong>Milestones:</strong><ul>';
+    if (gameState.prestigeCount > 0) html += `<li>Prestige Level: ${gameState.prestigeCount}</li>`;
+    if (gameState.totalEggs >= 1000000) html += `<li>Fence Unlocked (1M Eggs)</li>`;
+    html += '</ul>';
+
+    html += '<strong class="mt-2 inline-block">Upgrades:</strong><ul>';
+    for (const id in gameState.upgrades) {
+        if (gameState.upgrades[id] > 0) {
+            html += `<li>${CONFIG.UPGRADES[id].name}: Lvl ${gameState.upgrades[id]}</li>`;
+        }
+    }
+    html += '</ul>';
+
+    html += '<strong class="mt-2 inline-block">Chickens:</strong><ul>';
+    for (const id in gameState.chickens) {
+        if (gameState.chickens[id] > 0) {
+            html += `<li>${CONFIG.CHICKENS[id].name}: ${gameState.chickens[id]}</li>`;
+        }
+    }
+    html += '</ul>';
+
+    container.innerHTML = html;
 }
 
 function updateEggEffectsBanner(gameState) {

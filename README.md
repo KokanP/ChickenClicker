@@ -33,6 +33,10 @@ Version 2.5 introduces the ability to export and import your save data. This is 
 
 ## **Changelog**
 
+### **Version 2.94 (Diorama Prep)**
+*   **Feature (Dev):** Added a new non-graphical "Diorama State" panel to the main screen. This panel displays all active upgrades, owned chickens, and key milestone stats (like prestige count). This is a preparatory step to make all necessary data visible for the future "Living Diorama" graphical overhaul.
+*   **Housekeeping:** Updated version number to 2.94.
+
 ### **Version 2.93 (Clarity Update)**
 *   **UI/Clarity:** Updated the descriptions for several upgrades and chickens (Coop Worker, Incubator, Golden Loom, Rooster, Wyandotte Warrior, and Doja Cow) to be more explicit about their mechanical effects and how they scale. This addresses player confusion about upgrade stacking and hidden mechanics.
 *   **Housekeeping:** Updated version number to 2.93.
