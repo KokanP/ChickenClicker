@@ -33,6 +33,10 @@ Version 2.5 introduces the ability to export and import your save data. This is 
 
 ## **Changelog**
 
+### **Version 2.93 (Clarity Update)**
+*   **UI/Clarity:** Updated the descriptions for several upgrades and chickens (Coop Worker, Incubator, Golden Loom, Rooster, Wyandotte Warrior, and Doja Cow) to be more explicit about their mechanical effects and how they scale. This addresses player confusion about upgrade stacking and hidden mechanics.
+*   **Housekeeping:** Updated version number to 2.93.
+
 ### **Version 2.92 (Eggies)**
 *   **Feature (UI):** Added a new banner at the top of the screen that displays all active colored egg buffs. Each buff is shown as a colored "pill" with its name, an icon, and a countdown of its remaining duration in seconds.
 *   **Housekeeping:** Updated version number to 2.92.
